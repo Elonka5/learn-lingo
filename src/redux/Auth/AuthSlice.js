@@ -10,14 +10,6 @@ const initialState = {
   isLoggedIn: false,
 };
 
-// const initialState = {
-//   userId: null,
-//   login: null,
-//   email: null,
-//   isAuth: false,
-//   isAuthLoading: false,
-// };
-
 const authSlice = createSlice({
   name: 'auth',
   initialState,
