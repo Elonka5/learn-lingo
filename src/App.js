@@ -8,6 +8,8 @@ import Layout from './components/Layout/Layout';
 // import { routes } from './constants/routes';
 import PublicRoute from './components/Routes/PublicRoute';
 import Home from './pages/Home/Home';
+import { GlobalStyle } from './services/styles/GlobalStyles';
+import Teachers from './pages/Teachers/Teachers';
 
 // Створення посилання на кореневий об'єкт бази даних
 // const rootRef = ref(db);
@@ -39,8 +41,17 @@ const App = () => {
               </PublicRoute>
             }
           />
+          <Route
+            path="teachers"
+            element={
+              <PublicRoute>
+                <Teachers/>
+              </PublicRoute>
+            }
+          />
         </Route>
       </Routes>
+      <GlobalStyle />
     </>
     // <div>
     //   <SignIn />

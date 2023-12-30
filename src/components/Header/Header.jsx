@@ -1,6 +1,7 @@
 import React from 'react';
 import { useModal } from '../ModalContext/ModalContextProvider';
 import ModalRegistration from '../ModalRegistration/ModalRegistration';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
   const toggleModal = useModal();
@@ -8,8 +9,10 @@ const Header = () => {
     <div>
       <h2>Learn Lingo</h2>
       <div>
-        <p>Home</p>
-        <p>Teachers</p>
+        <nav>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="teachers">Teachers</NavLink>
+        </nav>
       </div>
       <div>
         <button>Log In</button>

@@ -1,10 +1,9 @@
-import React from 'react';
-import SignUp from '../SignInForm/SignInForm';
+import SignInForm from '../SignInForm/SignInForm';
 
 const ModalRegistration = () => {
   return (
     <div>
-      <SignUp />
+      <SignInForm />
     </div>
   );
 };

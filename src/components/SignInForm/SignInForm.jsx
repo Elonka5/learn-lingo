@@ -9,7 +9,7 @@ const initialState = {
   password: '',
 };
 
-const SignUp = () => {
+const SignInForm = () => {
   const [values, setValues] = useState(initialState);
   const toggleModal = useModal();
 
@@ -59,4 +59,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignInForm;

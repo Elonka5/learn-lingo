@@ -11,7 +11,6 @@ export const DivModalBox = styled.div`
   border-radius: 30px;
 
   h3 {
-    color: var(--primary-black);
     font-size: 18px;
     font-weight: 500;
     line-height: 1.1;
