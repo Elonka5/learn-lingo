@@ -3,18 +3,18 @@ import 'modern-normalize';
 
 export const GlobalStyle = createGlobalStyle`
 body {
-  /* min-height: 100vh; */
+  min-height: 100vh;
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.2;
   color: #121417;
   
+  
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  background: #fff;
 }
 
 code {

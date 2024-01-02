@@ -20,7 +20,9 @@ const TeacherCard = ({ teacher }) => {
 
   return (
     <li>
-      <img src={avatar_url} alt="avatar" />
+      <div>
+        <img src={avatar_url} alt="avatar" width="100px" />
+      </div>
       <div>
         <p>Languages</p>
         <ul>
@@ -31,7 +33,9 @@ const TeacherCard = ({ teacher }) => {
           <li>Rating:{rating}</li>
           <li>Price / 1 hour: {price_per_hour}</li>
         </ul>
-        <IoMdHeartEmpty />
+        <button>
+          <IoMdHeartEmpty />
+        </button>
         <h2>
           {name} {surname}
         </h2>

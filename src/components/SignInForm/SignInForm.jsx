@@ -30,7 +30,6 @@ const SignInForm = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h2>Registration Account</h2>
         <input
           type="text"
           name="name"

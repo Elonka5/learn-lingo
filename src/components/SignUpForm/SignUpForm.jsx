@@ -1,37 +1,46 @@
-import React, { useState } from "react";
-import { auth } from "../../firebase/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from 'react';
+import { useModal } from '../ModalContext/ModalContextProvider';
+import { useDispatch } from 'react-redux';
+import { loginThunk } from '../../redux/Auth/AuthThunk';
 
-const SignIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const initialState = {
+  email: '',
+  password: '',
+};
 
-  const signIn = (evt) => {
+const SignUpForm = () => {
+  const [values, setValues] = useState(initialState);
+
+  const toggleModal = useModal();
+  const dispatch = useDispatch();
+
+  const handleSubmit = evt => {
     evt.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log(userCredential);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(loginThunk(values));
+    toggleModal();
+  };
+
+  const handleChange = evt => {
+    const { value, name } = evt.target;
+    setValues(prev => ({ ...prev, [name]: value }));
   };
 
   return (
     <div className="sign-in-container">
-      <form onSubmit={signIn}>
-        <h1>Log In to your Account</h1>
+      <form onSubmit={handleSubmit}>
         <input
           type="email"
+          name="email"
           placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={values.email}
+          onChange={handleChange}
         ></input>
         <input
           type="password"
+          name="password"
           placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={values.password}
+          onChange={handleChange}
         ></input>
         <button type="submit">Log In</button>
       </form>
@@ -39,4 +48,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUpForm;

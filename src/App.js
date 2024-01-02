@@ -1,32 +1,14 @@
-// import { ref, get } from 'firebase/database';
-// import { db } from './firebase/firebase';
-// import SignIn from './components/SignUpForm/SignUpForm';
-// import SignUp from './components/SignInForm/SignInForm';
-// import AuthDetails from './components/AuthDetails/AuthDetails';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
-// import { routes } from './constants/routes';
 import PublicRoute from './components/Routes/PublicRoute';
-import Home from './pages/Home/Home';
+import PrivateRoute from './components/Routes/PrivateRoute';
+
 import { GlobalStyle } from './services/styles/GlobalStyles';
-import Teachers from './pages/Teachers/Teachers';
+import { lazy } from 'react';
 
-// Створення посилання на кореневий об'єкт бази даних
-// const rootRef = ref(db);
-
-// Виконання запиту та отримання даних
-// get(rootRef)
-//   .then(snapshot => {
-//     if (snapshot.exists()) {
-//       const data = snapshot.val();
-//       console.log('Дані з бази даних:', data);
-//     } else {
-//       console.log('Дані не знайдені.');
-//     }
-//   })
-//   .catch(error => {
-//     console.error('Помилка при виконанні запиту:', error);
-//   });
+const Home = lazy(() => import('./pages/Home/Home'));
+const Teachers = lazy(() => import('./pages/Teachers/Teachers'));
+const Favorites = lazy(() => import('./pages/Favorites/Favorites'));
 
 const App = () => {
   return (
@@ -45,19 +27,18 @@ const App = () => {
             path="teachers"
             element={
               <PublicRoute>
-                <Teachers/>
+                <Teachers />
               </PublicRoute>
             }
+          />
+          <Route
+            path="favorites"
+            element={<PrivateRoute component={<Favorites />} redirectTo="/" />}
           />
         </Route>
       </Routes>
       <GlobalStyle />
     </>
-    // <div>
-    //   <SignIn />
-    //   <SignUp />
-    //   <AuthDetails />
-    // </div>
   );
 };
 
