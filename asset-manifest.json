@@ -1,19 +1,28 @@
 {
   "files": {
     "main.css": "/learn-lingo/static/css/main.7cda0caf.css",
-    "main.js": "/learn-lingo/static/js/main.85a7c427.js",
+    "main.js": "/learn-lingo/static/js/main.ee7555f2.js",
+    "static/js/967.56bd3d7f.chunk.js": "/learn-lingo/static/js/967.56bd3d7f.chunk.js",
+    "static/js/654.84dfd143.chunk.js": "/learn-lingo/static/js/654.84dfd143.chunk.js",
+    "static/js/733.14684252.chunk.js": "/learn-lingo/static/js/733.14684252.chunk.js",
     "static/js/787.7cd7a635.chunk.js": "/learn-lingo/static/js/787.7cd7a635.chunk.js",
+    "static/js/941.3f28f270.chunk.js": "/learn-lingo/static/js/941.3f28f270.chunk.js",
     "static/media/hero_img@2xmobile.png": "/learn-lingo/static/media/hero_img@2xmobile.e016ce8971626c05422e.png",
     "static/media/hero_img.png": "/learn-lingo/static/media/hero_img.01f43438efb656c4d121.png",
     "static/media/hero_img_webp@2xmobile.webp": "/learn-lingo/static/media/hero_img_webp@2xmobile.aa43c6e8f3124ef0b807.webp",
     "static/media/hero_img_webp.webp": "/learn-lingo/static/media/hero_img_webp.b20773a32b78ad25100d.webp",
     "index.html": "/learn-lingo/index.html",
+    "static/media/ukraine.svg": "/learn-lingo/static/media/ukraine.d34743a6d4214a7edfd037c74ed2da93.svg",
     "main.7cda0caf.css.map": "/learn-lingo/static/css/main.7cda0caf.css.map",
-    "main.85a7c427.js.map": "/learn-lingo/static/js/main.85a7c427.js.map",
-    "787.7cd7a635.chunk.js.map": "/learn-lingo/static/js/787.7cd7a635.chunk.js.map"
+    "main.ee7555f2.js.map": "/learn-lingo/static/js/main.ee7555f2.js.map",
+    "967.56bd3d7f.chunk.js.map": "/learn-lingo/static/js/967.56bd3d7f.chunk.js.map",
+    "654.84dfd143.chunk.js.map": "/learn-lingo/static/js/654.84dfd143.chunk.js.map",
+    "733.14684252.chunk.js.map": "/learn-lingo/static/js/733.14684252.chunk.js.map",
+    "787.7cd7a635.chunk.js.map": "/learn-lingo/static/js/787.7cd7a635.chunk.js.map",
+    "941.3f28f270.chunk.js.map": "/learn-lingo/static/js/941.3f28f270.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7cda0caf.css",
-    "static/js/main.85a7c427.js"
+    "static/js/main.ee7555f2.js"
   ]
 }
