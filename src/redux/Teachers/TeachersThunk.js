@@ -10,10 +10,8 @@ export const fetchTeachers = createAsyncThunk(
 
       const snapshot = await get(teachersRef);
 
-      // Перевірте, чи існує об'єкт вчителів
       if (snapshot.exists()) {
         const teachersData = snapshot.val();
-        console.log(teachersData);
         return teachersData;
       } else {
         return {};

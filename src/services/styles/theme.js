@@ -3,6 +3,8 @@ export const theme = {
     primaryBlack: '#121417',
     secondaryFont: '#8A8A89',
     secondaryBlack: 'rgba(18, 20, 23, 0.70)',
+    rgbaBlack: 'rgba(18, 20, 23, 0.80)',
+    inputBorder: 'rgba(18, 20, 23, 0.1)',
     secondBackground: '#F8F8F8',
     white: '#fff',
     green: '#9FBAAE',
@@ -12,7 +14,7 @@ export const theme = {
     btnWhiteBg: '#FCFCFC',
   },
 
-  space: [0, 2, 4, 8, 16, 32, 64, 128, 256],
+  space: [0, 2, 4, 8, 16, 20, 32, 64, 98, 108, 128, 256],
 
   spacing: value => `${4 * value}px`,
 
@@ -27,7 +29,9 @@ export const theme = {
     s: '14px',
     m: '16px',
     l: '18px',
-    xl: '30px',
+    xl: '28px',
+    xsl: '40px',
+    xxl: '48px',
   },
 
   fontWeights: {
@@ -44,11 +48,12 @@ export const theme = {
   borders: {
     none: 'none',
     normal: '1px solid',
-    medium: '3px solid ',
+    medium: '2px dashed ',
   },
 
   radii: {
     none: '0',
+    small: '8px',
     medium: '30px',
     button: '12px',
     buttonCard: '35px',

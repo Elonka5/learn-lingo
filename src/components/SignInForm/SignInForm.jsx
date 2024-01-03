@@ -2,6 +2,11 @@ import { useState } from 'react';
 import { registerThunk } from '../../redux/Auth/AuthThunk';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../ModalContext/ModalContextProvider';
+import {
+  FormWrapper,
+  ModalText,
+  StyledInput,
+} from '../SignUpForm/SignUpFormStyled';
 
 const initialState = {
   email: '',
@@ -28,33 +33,42 @@ const SignInForm = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
+    <>
+      <ModalText>
+        Thank you for your interest in our platform! In order to register, we
+        need some information. Please provide us with the following information
+      </ModalText>
+      <FormWrapper onSubmit={handleSubmit}>
+        <StyledInput
           type="text"
           name="name"
-          placeholder="Enter your name"
+          placeholder="Name"
           value={values.name}
           onChange={handleChange}
+          marginBottom={4.5}
+          required
         />
-        <input
+        <StyledInput
           type="email"
           name="email"
-          placeholder="Enter your email"
+          placeholder="Email"
           value={values.email}
           onChange={handleChange}
-        ></input>
-        <input
+          marginBottom={4.5}
+          required
+        ></StyledInput>
+        <StyledInput
           type="password"
           name="password"
-          placeholder="Enter your password"
+          placeholder="Password"
           value={values.password}
           onChange={handleChange}
-        ></input>
-
+          marginBottom={10}
+          required
+        ></StyledInput>
         <button type="submit">Register</button>
-      </form>
-    </div>
+      </FormWrapper>
+    </>
   );
 };
 

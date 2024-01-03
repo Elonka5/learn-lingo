@@ -1,7 +1,6 @@
 import { useModal } from '../ModalContext/ModalContextProvider';
 import { DivModalBox, DivTitleWrapper } from './ModalBox.styled';
 import { IoMdClose } from 'react-icons/io';
-// import { ReactComponent as CloseModalSvg } from '../../../images/svg/x.svg';
 
 const ModalBox = ({ children, title, size, isLogoModal = false }) => {
   const toggleModal = useModal();

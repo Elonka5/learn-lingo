@@ -10,15 +10,9 @@ export const DivModalBox = styled.div`
   padding: ${({ $size }) => ($size === 'small' ? '32px 24px' : '32px 12px')};
   border-radius: 30px;
 
-  h3 {
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 1.1;
-  }
-
   @media screen and (min-width: 768px) {
     width: ${({ $size }) => getSize($size, 'md')}px;
-    padding: 12px 14px;
+    padding: 20px 20px 64px 64px;
     border-radius: 10px;
   }
   @media screen and (min-width: 1440px) {
@@ -29,13 +23,18 @@ export const DivModalBox = styled.div`
 export const DivTitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
 
   h2 {
-    color: var(--primary-black);
-    font-size: 26px;
-    font-weight: 500;
-    line-height: 1.23;
+    font-size: ${({ theme }) => theme.fontSizes.xsl};
+    font-weight: ${({ theme }) => theme.fontWeights.medium};
+    line-height: ${({ theme }) => theme.lineHeights.normal};
+    letter-spacing: -0.8px;
+    margin-top: ${({ theme }) => theme.spacing(11)};
+  }
+
+  svg {
+    width: ${({ theme }) => theme.spacing(8)};
+    height: ${({ theme }) => theme.spacing(8)};
+    cursor: pointer;
   }
 `;

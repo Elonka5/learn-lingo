@@ -1,16 +1,20 @@
-import React from 'react';
 import { useModal } from '../ModalContext/ModalContextProvider';
-import ModalRegistration from '../ModalRegistration/ModalRegistration';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoggedIn, selectUserName } from '../../redux/selectors';
+import ModalRegistration from '../ModalRegistration/ModalRegistration';
 import ModalLogIn from '../ModalLogin/ModalLogIn';
 import { logoutThunk } from '../../redux/Auth/AuthThunk';
 import {
+  BtnLogIn,
+  BtnRegister,
+  BtnWrapper,
   HeaderWrapper,
+  LogInSvg,
   LogoHeader,
   LogoWrapper,
   NavStyled,
+  SiteNav,
 } from './HeaderStyled';
 
 const Header = () => {
@@ -31,39 +35,47 @@ const Header = () => {
             <LogoHeader />
             <p>LearnLingo</p>
           </LogoWrapper>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="teachers">Teachers</NavLink>
-          {isAuth && <NavLink to="favorites">Favorites</NavLink>}
-        </NavStyled>
+          <SiteNav>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="teachers">Teachers</NavLink>
+            </li>
+            {isAuth && (
+              <li>
+                <NavLink to="favorites">Favorites</NavLink>
+              </li>
+            )}
+          </SiteNav>
 
-        <div>
           {isAuth ? (
             <>
               <p>{`Hello ${userName}`}</p>
               <button onClick={handleLogout}>Exit</button>
             </>
           ) : (
-            <>
-              <button
+            <BtnWrapper>
+              <BtnLogIn
                 onClick={() =>
                   toggleModal(<ModalLogIn size="medium" title="Log In" />)
                 }
               >
+                <LogInSvg />
                 Log In
-              </button>
-              <button
+              </BtnLogIn>
+              <BtnRegister
                 onClick={() =>
                   toggleModal(
                     <ModalRegistration size="medium" title="Registration" />
                   )
                 }
-                type="button"
               >
                 Registration
-              </button>
-            </>
+              </BtnRegister>
+            </BtnWrapper>
           )}
-        </div>
+        </NavStyled>
       </HeaderWrapper>
     </header>
   );

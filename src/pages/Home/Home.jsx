@@ -1,13 +1,16 @@
 import React from 'react';
 import Hero from '../../components/Hero/Hero';
 import Description from '../../components/Description/Description';
+import { Container } from '../../components/Container/ContainerStyled';
 
 const Home = () => {
   return (
-    <div>
-      <Hero />
-      <Description />
-    </div>
+    <main>
+      <Container>
+        <Hero />
+        <Description />
+      </Container>
+    </main>
   );
 };
 

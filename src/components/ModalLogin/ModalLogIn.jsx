@@ -1,12 +1,7 @@
-
 import SignUpForm from '../SignUpForm/SignUpForm';
 
 const ModalLogIn = () => {
-  return (
-    <div>
-      <SignUpForm />
-    </div>
-  );
+  return <SignUpForm />;
 };
 
 export default ModalLogIn;

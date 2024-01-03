@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useModal } from '../ModalContext/ModalContextProvider';
 import { useDispatch } from 'react-redux';
 import { loginThunk } from '../../redux/Auth/AuthThunk';
+import { FormWrapper, ModalText, StyledInput } from './SignUpFormStyled';
 
 const initialState = {
   email: '',
@@ -26,25 +27,33 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="sign-in-container">
-      <form onSubmit={handleSubmit}>
-        <input
+    <>
+      <ModalText>
+        Welcome back! Please enter your credentials to access your account and
+        continue your search for an teacher.
+      </ModalText>
+      <FormWrapper onSubmit={handleSubmit}>
+        <StyledInput
           type="email"
           name="email"
-          placeholder="Enter your email"
+          placeholder="Email"
           value={values.email}
           onChange={handleChange}
-        ></input>
-        <input
+          marginBottom={4.5}
+          required
+        ></StyledInput>
+        <StyledInput
           type="password"
           name="password"
-          placeholder="Enter your password"
+          placeholder="Password"
           value={values.password}
           onChange={handleChange}
-        ></input>
+          marginBottom={10}
+          required
+        ></StyledInput>
         <button type="submit">Log In</button>
-      </form>
-    </div>
+      </FormWrapper>
+    </>
   );
 };
 
