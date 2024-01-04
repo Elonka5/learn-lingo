@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTeachers } from '../../redux/Teachers/TeachersThunk';
 import TeacherCard from '../TeacherCard/TeacherCard';
+import { TeachersList } from './TeacherCatalogStyled';
 
 const TeacherCatalog = () => {
   const teachers = useSelector(state => state.teachers.teachersData);
@@ -19,12 +20,14 @@ const TeacherCatalog = () => {
 
   return (
     <div>
-      <ul>
+      <TeachersList>
         {teachers &&
           teachers
             .slice(0, visibleTeachers)
-            .map(teacher => <TeacherCard key={teacher.id} teacher={teacher} />)}
-      </ul>
+            .map(teacher => (
+              <TeacherCard key={teacher.name} teacher={teacher} />
+            ))}
+      </TeachersList>
       {visibleTeachers < teachers.length && (
         <button onClick={loadMore}>Load More</button>
       )}

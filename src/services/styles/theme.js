@@ -12,6 +12,7 @@ export const theme = {
     textGreen: '#38CD3E',
     star: '#FFC531',
     btnWhiteBg: '#FCFCFC',
+    grey: 'rgba(18, 20, 23, 0.2)',
   },
 
   space: [0, 2, 4, 8, 16, 20, 32, 64, 98, 108, 128, 256],
@@ -29,6 +30,7 @@ export const theme = {
     s: '14px',
     m: '16px',
     l: '18px',
+    ml: '24px',
     xl: '28px',
     xsl: '40px',
     xxl: '48px',
@@ -49,12 +51,14 @@ export const theme = {
     none: 'none',
     normal: '1px solid',
     medium: '2px dashed ',
+    large: '3px solid',
   },
 
   radii: {
     none: '0',
     small: '8px',
     medium: '30px',
+    large: '35px',
     button: '12px',
     buttonCard: '35px',
     input: '14px',

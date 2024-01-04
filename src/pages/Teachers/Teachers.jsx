@@ -1,12 +1,14 @@
 import React from 'react';
 import TeacherCatalog from '../../components/TeacherCatalog/TeacherCatalog';
-import { Container } from '../../components/Container/ContainerStyled';
+import Container from '../../components/Container/Container';
 
 const Teachers = () => {
   return (
-    <Container>
-      <TeacherCatalog />
-    </Container>
+    <main style={{ backgroundColor: '#F8F8F8' }}>
+      <Container>
+        <TeacherCatalog />
+      </Container>
+    </main>
   );
 };
 
