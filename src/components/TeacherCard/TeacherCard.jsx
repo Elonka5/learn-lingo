@@ -1,10 +1,12 @@
 import { IoBookOutline } from 'react-icons/io5';
 import { FaStar } from 'react-icons/fa';
 import { IoMdHeartEmpty } from 'react-icons/io';
+import { IoMdHeart } from 'react-icons/io';
 import {
   AddMore,
   BtnTrial,
   Card,
+  CommentText,
   CommentsWrapper,
   DescrTeacherWrapper,
   DescriptionText,
@@ -12,6 +14,7 @@ import {
   LangWrapper,
   LessonWrapper,
   LevelWrapper,
+  ReviewList,
   ReviewWrapper,
   StyledPrice,
   StyledSpan,
@@ -22,10 +25,14 @@ import {
 } from './TeacherCardStyled';
 import { useState } from 'react';
 import { generateUniqueAvatar } from '../../helpers/Avatar';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFavoriteTeacher, selectIsLoggedIn } from '../../redux/selectors';
+import { handleSwitchFavorite } from '../../helpers/handleSwitchFavorite';
 
 const TeacherCard = ({ teacher }) => {
   const {
     name,
+    id,
     surname,
     languages,
     levels,
@@ -41,12 +48,29 @@ const TeacherCard = ({ teacher }) => {
 
   const [showMore, setShowMore] = useState(false);
 
+  const isFavorite = useSelector(selectFavoriteTeacher);
+  const isAuth = useSelector(selectIsLoggedIn);
+
+  const isFavoriteTeacher = isFavorite.some(item => item.id === id);
+
+  const dispatch = useDispatch();
+
   const toggleDescription = () => {
     setShowMore(!showMore);
   };
 
+  const handleSwitchFavoriteWrapper = () => {
+    const teacherData = {
+      id,
+      name,
+      surname,
+    };
+
+    handleSwitchFavorite(isAuth, isFavorite, dispatch, teacherData);
+  };
+
   return (
-    <Card>
+    <Card key={id}>
       <WrapperCard>
         <WrapperImg>
           <img src={avatar_url} alt="avatar" />
@@ -71,8 +95,12 @@ const TeacherCard = ({ teacher }) => {
                 Price / 1 hour: <StyledPrice>{price_per_hour}$</StyledPrice>
               </li>
             </ul>
-            <button>
-              <IoMdHeartEmpty />
+            <button onClick={handleSwitchFavoriteWrapper}>
+              {isFavoriteTeacher ? (
+                <IoMdHeart fill="#FFC531" />
+              ) : (
+                <IoMdHeartEmpty />
+              )}
             </button>
           </LangWrapper>
           <TitleName>
@@ -99,7 +127,7 @@ const TeacherCard = ({ teacher }) => {
             <>
               <ExpText>{experience}</ExpText>
               <div>
-                <ul>
+                <ReviewList>
                   {reviews.map((review, index) => (
                     <li key={index}>
                       <ReviewWrapper>
@@ -118,10 +146,10 @@ const TeacherCard = ({ teacher }) => {
                           </p>
                         </CommentsWrapper>
                       </ReviewWrapper>
-                      <p>{review.comment}</p>
+                      <CommentText>{review.comment}</CommentText>
                     </li>
                   ))}
-                </ul>
+                </ReviewList>
               </div>
             </>
           )}

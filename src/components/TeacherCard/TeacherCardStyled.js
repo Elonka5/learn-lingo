@@ -185,6 +185,7 @@ export const ReviewWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: ${({ theme }) => theme.spacing(3)};
+  margin-bottom: ${({ theme }) => theme.spacing(4)};
 `;
 
 export const CommentsWrapper = styled.div`
@@ -202,4 +203,16 @@ export const CommentsWrapper = styled.div`
   svg {
     margin-right: ${({ theme }) => theme.spacing(2)};
   }
+`;
+
+export const ReviewList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing(8)};
+`;
+
+export const CommentText = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.m};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  line-height: 24px; /* 150% */
 `;

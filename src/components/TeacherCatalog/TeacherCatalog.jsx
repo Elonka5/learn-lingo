@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTeachers } from '../../redux/Teachers/TeachersThunk';
 import TeacherCard from '../TeacherCard/TeacherCard';
-import { TeachersList } from './TeacherCatalogStyled';
+import { LoadMoreBtn, TeachersList } from './TeacherCatalogStyled';
 
 const TeacherCatalog = () => {
   const teachers = useSelector(state => state.teachers.teachersData);
@@ -19,7 +19,7 @@ const TeacherCatalog = () => {
   };
 
   return (
-    <div>
+    <>
       <TeachersList>
         {teachers &&
           teachers
@@ -29,9 +29,9 @@ const TeacherCatalog = () => {
             ))}
       </TeachersList>
       {visibleTeachers < teachers.length && (
-        <button onClick={loadMore}>Load More</button>
+        <LoadMoreBtn onClick={loadMore}>Load More</LoadMoreBtn>
       )}
-    </div>
+    </>
   );
 };
 

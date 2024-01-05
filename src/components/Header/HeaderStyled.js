@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ReactComponent as LogoIcon } from '../../assets/images/ukraine.svg';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { FiLogIn } from 'react-icons/fi';
 
 export const HeaderWrapper = styled.div`
@@ -82,4 +82,21 @@ export const BtnRegister = styled.button`
   font-size: 16px;
   font-weight: 700;
   line-height: 20px; /* 125% */
+`;
+
+export const StyledNavLink = styled(NavLink)`
+  color: ${({ theme }) => theme.colors.primaryBlack};
+  text-decoration: none;
+  height: 40px;
+  width: 80px;
+
+  &.active {
+    color: ${({ theme }) => theme.colors.green};
+    border: ${({ theme }) => `${theme.borders.normal} ${theme.colors.green}`};
+    border-radius: ${({ theme }) => theme.radii.button};
+  }
+
+  &:hover {
+    /* Додайте інші стилі, які вам потрібні для стану hover */
+  }
 `;

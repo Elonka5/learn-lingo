@@ -1,5 +1,4 @@
 import { useModal } from '../ModalContext/ModalContextProvider';
-import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoggedIn, selectUserName } from '../../redux/selectors';
 import ModalRegistration from '../ModalRegistration/ModalRegistration';
@@ -15,6 +14,7 @@ import {
   LogoWrapper,
   NavStyled,
   SiteNav,
+  StyledNavLink,
 } from './HeaderStyled';
 
 const Header = () => {
@@ -37,14 +37,14 @@ const Header = () => {
           </LogoWrapper>
           <SiteNav>
             <li>
-              <NavLink to="/">Home</NavLink>
+              <StyledNavLink to="/">Home</StyledNavLink>
             </li>
             <li>
-              <NavLink to="teachers">Teachers</NavLink>
+              <StyledNavLink to="teachers">Teachers</StyledNavLink>
             </li>
             {isAuth && (
               <li>
-                <NavLink to="favorites">Favorites</NavLink>
+                <StyledNavLink to="favorites">Favorites</StyledNavLink>
               </li>
             )}
           </SiteNav>
