@@ -60,11 +60,7 @@ const TeacherCard = ({ teacher }) => {
   };
 
   const handleSwitchFavoriteWrapper = () => {
-    const teacherData = {
-      id,
-      name,
-      surname,
-    };
+    const teacherData = { ...teacher };
 
     handleSwitchFavorite(isAuth, isFavorite, dispatch, teacherData);
   };
@@ -111,7 +107,7 @@ const TeacherCard = ({ teacher }) => {
               <DescriptionText>
                 <TextTitle>Speaks:</TextTitle>{' '}
                 <p>
-                  <span> {languages.join(', ')}</span>
+                  <span> {languages.join(',')}</span>
                 </p>
               </DescriptionText>
               <DescriptionText>

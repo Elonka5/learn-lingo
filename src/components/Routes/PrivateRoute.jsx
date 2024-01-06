@@ -4,7 +4,7 @@ import { selectIsLoggedIn } from '../../redux/selectors';
 
 const PrivateRoute = ({ component: Component, redirectTo = '/' }) => {
   const isLogin = useSelector(selectIsLoggedIn);
-  return isLogin ? <Navigate to={redirectTo} /> : Component;
+  return !isLogin ? <Navigate to={redirectTo} /> : Component;
 };
 
 export default PrivateRoute;

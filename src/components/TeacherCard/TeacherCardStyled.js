@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Card = styled.li`
   background-color: ${({ theme }) => theme.colors.white};
   padding: ${({ theme }) => theme.spacing(6)};
+  border-radius: ${({ theme }) => theme.radii.card};
 `;
 
 export const WrapperCard = styled.div`

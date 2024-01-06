@@ -13,6 +13,7 @@ export const theme = {
     star: '#FFC531',
     btnWhiteBg: '#FCFCFC',
     grey: 'rgba(18, 20, 23, 0.2)',
+    red: '#ef5050',
   },
 
   space: [0, 2, 4, 8, 16, 20, 32, 64, 98, 108, 128, 256],
@@ -60,6 +61,7 @@ export const theme = {
     medium: '30px',
     large: '35px',
     button: '12px',
+    card: '24px',
     buttonCard: '35px',
     input: '14px',
     round: '50%',

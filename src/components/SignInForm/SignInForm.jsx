@@ -1,35 +1,42 @@
-import { useState } from 'react';
 import { registerThunk } from '../../redux/Auth/AuthThunk';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../ModalContext/ModalContextProvider';
+import { FiEyeOff } from 'react-icons/fi';
+import { FiEye } from 'react-icons/fi';
+import { Formik } from 'formik';
 import {
+  Btn,
   FormWrapper,
   ModalText,
+  StyledError,
   StyledInput,
+  ToggleBtn,
+  WrapperInput,
 } from '../SignUpForm/SignUpFormStyled';
+import { validationSignIn } from '../../helpers/schemas';
+import { useState } from 'react';
 
 const initialState = {
-  email: '',
   name: '',
+  email: '',
   password: '',
 };
 
 const SignInForm = () => {
-  const [values, setValues] = useState(initialState);
+  const [showPassword, setShowPassword] = useState(false);
+
   const toggleModal = useModal();
 
-  //   const authState = useSelector(state => state.auth);
   const dispatch = useDispatch();
 
-  const handleSubmit = evt => {
-    evt.preventDefault();
-    dispatch(registerThunk(values));
-    toggleModal();
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
   };
 
-  const handleChange = evt => {
-    const { value, name } = evt.target;
-    setValues(prev => ({ ...prev, [name]: value }));
+  const handlerSubmit = (values, { resetForm }) => {
+    dispatch(registerThunk(values));
+    toggleModal();
+    resetForm();
   };
 
   return (
@@ -38,36 +45,48 @@ const SignInForm = () => {
         Thank you for your interest in our platform! In order to register, we
         need some information. Please provide us with the following information
       </ModalText>
-      <FormWrapper onSubmit={handleSubmit}>
-        <StyledInput
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={values.name}
-          onChange={handleChange}
-          marginBottom={4.5}
-          required
-        />
-        <StyledInput
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={values.email}
-          onChange={handleChange}
-          marginBottom={4.5}
-          required
-        ></StyledInput>
-        <StyledInput
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={values.password}
-          onChange={handleChange}
-          marginBottom={10}
-          required
-        ></StyledInput>
-        <button type="submit">Register</button>
-      </FormWrapper>
+      <Formik
+        initialValues={initialState}
+        validationSchema={validationSignIn}
+        onSubmit={handlerSubmit}
+      >
+        {({ errors, touched }) => {
+          return (
+            <FormWrapper>
+              <WrapperInput>
+                <StyledInput
+                  $error={errors.name && touched.name}
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  marginBottom={4.5}
+                />
+                <StyledError name="name" component="span" />
+              </WrapperInput>
+              <StyledInput
+                $error={errors.email && touched.email}
+                type="email"
+                name="email"
+                placeholder="Email"
+                marginBottom={4.5}
+              />
+              <StyledError name="email" component="span" />
+              <StyledInput
+                $error={errors.password && touched.password}
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                placeholder="Password"
+                marginBottom={10}
+              />
+              <ToggleBtn type="button" onClick={togglePassword}>
+                {showPassword ? <FiEye /> : <FiEyeOff />}
+              </ToggleBtn>
+              <StyledError name="password" component="span" />
+              <Btn type="submit">Register</Btn>
+            </FormWrapper>
+          );
+        }}
+      </Formik>
     </>
   );
 };

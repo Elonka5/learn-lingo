@@ -24,9 +24,7 @@ const TeacherCatalog = () => {
         {teachers &&
           teachers
             .slice(0, visibleTeachers)
-            .map(teacher => (
-              <TeacherCard key={teacher.name} teacher={teacher} />
-            ))}
+            .map(teacher => <TeacherCard key={teacher.id} teacher={teacher} />)}
       </TeachersList>
       {visibleTeachers < teachers.length && (
         <LoadMoreBtn onClick={loadMore}>Load More</LoadMoreBtn>
