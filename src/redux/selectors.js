@@ -13,16 +13,29 @@ export const selectTeachers = state => state.teachers.teachersData;
 export const selectFilteredTeachers = createSelector(
   [selectTeachers, selectFilter],
   (teachers, filter) => {
-    const { levels } = filter;
+    const { levels, languages, price_per_hour } = filter;
 
-    if (!levels || levels === '') {
+    if (
+      (!levels || levels.length === 0) &&
+      (!languages || languages.length === 0) &&
+      !price_per_hour
+    ) {
       return teachers;
     }
 
-    const filteredTeachers = teachers.filter(teacher =>
-      levels.every(selectedLevel => teacher.levels.includes(selectedLevel))
+    return teachers.filter(
+      teacher =>
+        (!levels ||
+          levels.length === 0 ||
+          levels.every(selectedLevel =>
+            teacher.levels.includes(selectedLevel)
+          )) &&
+        (!languages ||
+          languages.length === 0 ||
+          languages.every(selectedLanguage =>
+            teacher.languages.includes(selectedLanguage)
+          )) &&
+        (!price_per_hour || teacher.price_per_hour === price_per_hour)
     );
-
-    return filteredTeachers;
   }
 );

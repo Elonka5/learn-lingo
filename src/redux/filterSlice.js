@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  //   price_per_hour: '',
+  price_per_hour: 0,
   languages: [],
   levels: [],
 };
