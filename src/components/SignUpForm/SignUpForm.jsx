@@ -2,7 +2,19 @@ import React, { useState } from 'react';
 import { useModal } from '../ModalContext/ModalContextProvider';
 import { useDispatch } from 'react-redux';
 import { loginThunk } from '../../redux/Auth/AuthThunk';
-import { FormWrapper, ModalText, StyledInput } from './SignUpFormStyled';
+import {
+  Btn,
+  FormWrapper,
+  ModalText,
+  StyledError,
+  StyledInput,
+  ToggleBtn,
+  WrapperInput,
+} from './SignUpFormStyled';
+import { FiEyeOff } from 'react-icons/fi';
+import { FiEye } from 'react-icons/fi';
+import { Formik } from 'formik';
+import { validationSignUp } from '../../helpers/schemas';
 
 const initialState = {
   email: '',
@@ -10,20 +22,19 @@ const initialState = {
 };
 
 const SignUpForm = () => {
-  const [values, setValues] = useState(initialState);
+  const [showPassword, setShowPassword] = useState(false);
 
   const toggleModal = useModal();
   const dispatch = useDispatch();
 
-  const handleSubmit = evt => {
-    evt.preventDefault();
-    dispatch(loginThunk(values));
-    toggleModal();
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
   };
 
-  const handleChange = evt => {
-    const { value, name } = evt.target;
-    setValues(prev => ({ ...prev, [name]: value }));
+  const handlerSubmit = (values, { resetForm }) => {
+    dispatch(loginThunk(values));
+    toggleModal();
+    resetForm();
   };
 
   return (
@@ -32,27 +43,40 @@ const SignUpForm = () => {
         Welcome back! Please enter your credentials to access your account and
         continue your search for an teacher.
       </ModalText>
-      <FormWrapper onSubmit={handleSubmit}>
-        <StyledInput
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={values.email}
-          onChange={handleChange}
-          marginBottom={4.5}
-          required
-        ></StyledInput>
-        <StyledInput
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={values.password}
-          onChange={handleChange}
-          marginBottom={10}
-          required
-        ></StyledInput>
-        <button type="submit">Log In</button>
-      </FormWrapper>
+      <Formik
+        initialValues={initialState}
+        validationSchema={validationSignUp}
+        onSubmit={handlerSubmit}
+      >
+        {({ errors, touched }) => {
+          return (
+            <FormWrapper>
+              <WrapperInput marginBottom={4.5}>
+                <StyledInput
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  $error={errors.email && touched.email}
+                />
+                <StyledError name="email" component="span" />
+              </WrapperInput>
+              <WrapperInput marginBottom={10}>
+                <StyledInput
+                  $error={errors.password && touched.password}
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  placeholder="Password"
+                />
+                <ToggleBtn type="button" onClick={togglePassword}>
+                  {showPassword ? <FiEye /> : <FiEyeOff />}
+                </ToggleBtn>
+                <StyledError name="password" component="span" />
+              </WrapperInput>
+              <Btn type="submit">Log In</Btn>
+            </FormWrapper>
+          );
+        }}
+      </Formik>
     </>
   );
 };

@@ -53,35 +53,36 @@ const SignInForm = () => {
         {({ errors, touched }) => {
           return (
             <FormWrapper>
-              <WrapperInput>
+              <WrapperInput marginBottom={4.5}>
                 <StyledInput
                   $error={errors.name && touched.name}
                   type="text"
                   name="name"
                   placeholder="Name"
-                  marginBottom={4.5}
                 />
                 <StyledError name="name" component="span" />
               </WrapperInput>
-              <StyledInput
-                $error={errors.email && touched.email}
-                type="email"
-                name="email"
-                placeholder="Email"
-                marginBottom={4.5}
-              />
-              <StyledError name="email" component="span" />
-              <StyledInput
-                $error={errors.password && touched.password}
-                type={showPassword ? 'text' : 'password'}
-                name="password"
-                placeholder="Password"
-                marginBottom={10}
-              />
-              <ToggleBtn type="button" onClick={togglePassword}>
-                {showPassword ? <FiEye /> : <FiEyeOff />}
-              </ToggleBtn>
-              <StyledError name="password" component="span" />
+              <WrapperInput marginBottom={4.5}>
+                <StyledInput
+                  $error={errors.email && touched.email}
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                />
+                <StyledError name="email" component="span" />
+              </WrapperInput>
+              <WrapperInput marginBottom={10}>
+                <StyledInput
+                  $error={errors.password && touched.password}
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  placeholder="Password"
+                />
+                <ToggleBtn type="button" onClick={togglePassword}>
+                  {showPassword ? <FiEye /> : <FiEyeOff />}
+                </ToggleBtn>
+                <StyledError name="password" component="span" />
+              </WrapperInput>
               <Btn type="submit">Register</Btn>
             </FormWrapper>
           );

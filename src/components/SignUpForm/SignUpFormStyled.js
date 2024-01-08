@@ -16,7 +16,7 @@ export const StyledInput = styled(Field)`
   border: 1px solid
     ${({ theme, $error }) =>
       $error ? theme.colors.red : theme.colors.inputBorder};
-  margin-bottom: ${({ marginBottom, theme }) => theme.spacing(marginBottom)};
+
   width: ${({ theme }) => theme.spacing(109.5)};
   appearance: none;
   outline: none;
@@ -38,12 +38,11 @@ export const ModalText = styled.p`
 
 export const StyledError = styled(ErrorMessage)`
   position: absolute;
-  top: 30px;
-  left: 30px;
-  color: ${({ theme }) => theme.colors.green};
+  top: ${({ theme }) => theme.spacing(12.5)};
+  left: ${({ theme }) => theme.spacing(1)};
+  color: ${({ theme }) => theme.colors.red};
   display: block;
-  font-size: 12px;
-  font-weight: 400;
+  font-size: ${({ theme }) => theme.fontSizes.xs};
   line-height: 18px;
 `;
 
@@ -65,8 +64,10 @@ export const Btn = styled.button`
 
 export const ToggleBtn = styled.button`
   position: absolute;
-  right: 10px;
-  top: 45px;
+  right: ${({ theme }) => theme.spacing(4.5)};
+  top: ${({ theme }) => theme.spacing(4.25)};
+  background-color: transparent;
+  border: ${({ theme }) => theme.borders.none};
 
   & svg {
     cursor: pointer;
@@ -75,4 +76,5 @@ export const ToggleBtn = styled.button`
 
 export const WrapperInput = styled.div`
   position: relative;
+  margin-bottom: ${({ marginBottom, theme }) => theme.spacing(marginBottom)};
 `;

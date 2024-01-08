@@ -10,6 +10,11 @@ const initialState = {
 const teacherSlice = createSlice({
   name: 'teachers',
   initialState,
+  reducers: {
+    clearTeachersList(state) {
+      state.teachersData = [];
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchTeachers.pending, state => {
@@ -27,3 +32,4 @@ const teacherSlice = createSlice({
 });
 
 export const teacherReducer = teacherSlice.reducer;
+export const { clearTeachersList } = teacherSlice.actions;
