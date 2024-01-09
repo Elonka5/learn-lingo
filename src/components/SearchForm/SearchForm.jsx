@@ -3,12 +3,20 @@ import { useDispatch } from 'react-redux';
 import { setFilter } from '../../redux/filterSlice';
 import Select from 'react-select';
 import { makes, languages, pricePoints } from '../../helpers/searchForm';
+import { LabWrap, SelectWrapper } from './SearchFormStyled';
+import {
+  customStylesLanguages,
+  customStylesLevels,
+  customStylesPrice,
+  formatOptionLabel,
+} from '../../constants/selectStyles';
 
 const SearchForm = () => {
-  const dispatch = useDispatch();
   const [selectedLevels, setSelectedLevels] = useState([]);
   const [selectedLanguages, setSelectedLanguages] = useState([]);
-  const [selectedPrice, setSelectedPrice] = useState(0); // Додайте стан для ціни
+  const [selectedPrice, setSelectedPrice] = useState(0);
+
+  const dispatch = useDispatch();
 
   const handleLevelsChange = selectedOptions => {
     setSelectedLevels(selectedOptions);
@@ -16,7 +24,7 @@ const SearchForm = () => {
     const filters = {
       levels: selectedOptions.map(option => option.value),
       languages: selectedLanguages.map(option => option.value),
-      price_per_hour: selectedPrice, // Додайте ціну в фільтри
+      price_per_hour: selectedPrice,
     };
 
     dispatch(setFilter(filters));
@@ -28,19 +36,23 @@ const SearchForm = () => {
     const filters = {
       levels: selectedLevels.map(option => option.value),
       languages: selectedOptions.map(option => option.value),
-      price_per_hour: selectedPrice, // Додайте ціну в фільтри
+      price_per_hour: selectedPrice,
     };
 
     dispatch(setFilter(filters));
   };
 
   const handlePriceChange = selectedOption => {
-    const selectedPrice = selectedOption ? Number(selectedOption.value) : null;
+    const newSelectedPrice = selectedOption
+      ? Number(selectedOption.value)
+      : null;
+
+    setSelectedPrice(newSelectedPrice);
 
     const filters = {
       levels: selectedLevels.map(option => option.value),
       languages: selectedLanguages.map(option => option.value),
-      price_per_hour: selectedPrice,
+      price_per_hour: newSelectedPrice,
     };
 
     dispatch(setFilter(filters));
@@ -48,40 +60,44 @@ const SearchForm = () => {
 
   return (
     <form>
-      <div>
-        <label>
-          <p>Level of knowledge</p>
-          <Select
-            name="levels"
-            placeholder="Enter the text"
-            options={makes.map(value => ({ value, label: value }))}
-            isMulti
-            onChange={handleLevelsChange}
-            value={selectedLevels}
-          />
-        </label>
-        <label>
+      <SelectWrapper>
+        <LabWrap>
           <p>Languages</p>
           <Select
+            styles={customStylesLanguages}
             name="languages"
-            placeholder="Enter the text"
+            placeholder="Select language"
             options={languages.map(value => ({ value, label: value }))}
             isMulti
             onChange={handleLanguagesChange}
             value={selectedLanguages}
           />
-        </label>
-        <label>
+        </LabWrap>
+        <LabWrap>
+          <p>Level of knowledge</p>
+          <Select
+            name="levels"
+            styles={customStylesLevels}
+            placeholder="Select level"
+            options={makes.map(value => ({ value, label: value }))}
+            isMulti
+            onChange={handleLevelsChange}
+            value={selectedLevels}
+            formatOptionLabel={formatOptionLabel}
+          />
+        </LabWrap>
+        <LabWrap>
           <p>Price</p>
           <Select
             name="price_per_hour"
+            styles={customStylesPrice}
             placeholder="Select price"
             options={pricePoints}
             onChange={handlePriceChange}
             value={pricePoints.find(option => option.value === selectedPrice)}
           />
-        </label>
-      </div>
+        </LabWrap>
+      </SelectWrapper>
     </form>
   );
 };

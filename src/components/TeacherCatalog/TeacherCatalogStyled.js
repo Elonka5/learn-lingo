@@ -22,4 +22,10 @@ export const LoadMoreBtn = styled.button`
   font-size: ${({ theme }) => theme.fontSizes.l};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   line-height: 28px; /* 155.556% */
+  transition: background-color 0.3s ease;
+
+  &:hover,
+  &:focus {
+    background-color: ${({ theme }) => theme.colors.secondGreen};
+  }
 `;

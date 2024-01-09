@@ -2,6 +2,7 @@ import {
   addFavorite,
   removeFromFavorite,
 } from '../redux/Favorite/FavoriteSlice';
+import Notiflix from 'notiflix';
 
 export const handleSwitchFavorite = (
   isAuth,
@@ -16,6 +17,8 @@ export const handleSwitchFavorite = (
       dispatch(addFavorite(teacherData));
     }
   } else {
-    alert('You should be signed');
+    Notiflix.Notify.warning(
+      'Access to this action is restricted to authorized users only. Please log in to your account.'
+    );
   }
 };

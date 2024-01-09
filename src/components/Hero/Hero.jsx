@@ -3,16 +3,16 @@ import heroImgWebp from '../../assets/images/hero_img_webp.webp';
 import heroImgWebpRetina from '../../assets/images/hero_img_webp@2xmobile.webp';
 import heroImg from '../../assets/images/hero_img.png';
 import heroImgMobile from '../../assets/images/hero_img@2xmobile.png';
-import { HeroWrapper, StyledNav, TitleWrapper } from './Hero.styled';
+import { HeroWrapper, StyledNav, Title, TitleWrapper } from './Hero.styled';
 
 const Hero = () => {
   return (
     <section>
       <HeroWrapper>
         <TitleWrapper>
-          <h1>
+          <Title>
             Unlock your potential with the best <span>language</span> tutors
-          </h1>
+          </Title>
           <p>
             Embark on an Exciting Language Journey with Expert Language Tutors:
             Elevate your language proficiency to new heights by connecting with

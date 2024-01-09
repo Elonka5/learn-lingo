@@ -1,5 +1,4 @@
 export const makes = [
-  'All',
   'A1 Beginner',
   'A2 Elementary',
   'B1 Intermediate',
@@ -9,7 +8,6 @@ export const makes = [
 ];
 
 export const languages = [
-  'All',
   'English',
   'German',
   'French',
@@ -27,6 +25,7 @@ export const languages = [
 // export const pricePoints = [25, 27, 28, 30, 32, 35];
 
 export const pricePoints = [
+  { value: '', label: 'All' },
   { value: 25, label: '25' },
   { value: 27, label: '27' },
   { value: 28, label: '28' },

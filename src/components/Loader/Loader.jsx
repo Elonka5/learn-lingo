@@ -1,8 +1,12 @@
 import React from 'react';
-import { WrapLoader } from './LoaderStyled';
+import { DivLoaderWrapper, WrapLoader } from './LoaderStyled';
 
 const Loader = () => {
-  return <WrapLoader></WrapLoader>;
+  return (
+    <DivLoaderWrapper>
+      <WrapLoader></WrapLoader>
+    </DivLoaderWrapper>
+  );
 };
 
 export default Loader;

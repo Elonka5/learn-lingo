@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import { ReactComponent as LogoIcon } from '../../assets/images/ukraine.svg';
 import { Link, NavLink } from 'react-router-dom';
 import { FiLogIn } from 'react-icons/fi';
+import { FiLogOut } from 'react-icons/fi';
 
 export const HeaderWrapper = styled.div`
   width: ${({ theme }) => theme.spacing(360)};
   margin-left: auto;
   margin-right: auto;
-  padding: ${({ theme }) => theme.space[5]}px
-    ${({ theme }) => theme.space[10]}px;
+  padding: ${({ theme }) => `${theme.spacing(5)} ${theme.spacing(32)}`};
 `;
 
 export const NavStyled = styled.nav`
@@ -23,12 +23,11 @@ export const LogoWrapper = styled(Link)`
   gap: ${({ theme }) => theme.spacing(2)};
 
   p {
-    font-size: 20px;
+    font-size: ${({ theme }) => theme.fontSizes.sl};
+    font-weight: ${({ theme }) => theme.fontWeights.medium};
     font-style: normal;
-    font-weight: 500;
-    line-height: 1.2;
+    line-height: ${({ theme }) => theme.lineHeights.normal};
     letter-spacing: -0.4px;
-    margin-right: 130px;
   }
 `;
 
@@ -38,6 +37,12 @@ export const LogoHeader = styled(LogoIcon)`
 `;
 
 export const LogInSvg = styled(FiLogIn)`
+  stroke: ${({ theme }) => theme.colors.green};
+  width: ${({ theme }) => theme.spacing(5)};
+  height: ${({ theme }) => theme.spacing(5)};
+`;
+
+export const LogOutSvg = styled(FiLogOut)`
   stroke: ${({ theme }) => theme.colors.green};
   width: ${({ theme }) => theme.spacing(5)};
   height: ${({ theme }) => theme.spacing(5)};
@@ -60,12 +65,18 @@ export const BtnLogIn = styled.button`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing(2)};
-  border: none;
+  border: ${({ theme }) => theme.borders.none};
   background-color: transparent;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: ${({ theme }) => theme.fontSizes.m};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
   line-height: 20px;
   cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:hover,
+  &:focus {
+    color: ${({ theme }) => theme.colors.green};
+  }
 `;
 
 export const BtnRegister = styled.button`
@@ -74,21 +85,31 @@ export const BtnRegister = styled.button`
   justify-content: center;
   padding: 14px 39px;
   border: none;
-  gap: 8px;
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.radii.button};
   background: #121417;
   cursor: pointer;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 20px; /* 125% */
+  color: ${({ theme }) => theme.colors.white};
+  font-size: ${({ theme }) => theme.fontSizes.m};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  line-height: ${({ theme }) => theme.lineHeights.normal};
+  transition: background-color 0.3s ease;
+
+  &:hover,
+  &:focus {
+    background-color: ${({ theme }) => theme.colors.green};
+  }
 `;
 
 export const StyledNavLink = styled(NavLink)`
   color: ${({ theme }) => theme.colors.primaryBlack};
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   text-decoration: none;
-  height: 40px;
-  width: 80px;
+  height: ${({ theme }) => theme.spacing(8.5)};
+  width: ${({ theme }) => theme.spacing(20)};
+  border-radius: ${({ theme }) => theme.radii.button};
+  transition: background-color 300ms ease-in-out;
 
   &.active {
     color: ${({ theme }) => theme.colors.green};
@@ -96,7 +117,24 @@ export const StyledNavLink = styled(NavLink)`
     border-radius: ${({ theme }) => theme.radii.button};
   }
 
-  &:hover {
-    /* Додайте інші стилі, які вам потрібні для стану hover */
+  &:hover,
+  &:focus {
+    background-color: ${({ theme }) => theme.colors.green};
+    color: ${({ theme }) => theme.colors.white};
+    border-radius: ${({ theme }) => theme.radii.button};
+    background-position: 0;
+  }
+`;
+
+export const AuthWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing(4)};
+
+  p {
+    font-size: ${({ theme }) => theme.fontSizes.m};
+    font-weight: ${({ theme }) => theme.fontWeights.bold};
+    line-height: ${({ theme }) => theme.lineHeights.normal};
   }
 `;

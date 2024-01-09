@@ -4,6 +4,7 @@ export const validationSignIn = yup.object().shape({
   name: yup
     .string()
     .required('name is required')
+    .max(12, 'the name must containe maximum of 12 characters')
     .matches(
       /^[a-zA-Z0-9_]{3,20}$/,
       'Invalid username. Must be alphanumeric with underscores. Length between 3 and 20 characters.'

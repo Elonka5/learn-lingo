@@ -5,11 +5,13 @@ import ModalRegistration from '../ModalRegistration/ModalRegistration';
 import ModalLogIn from '../ModalLogin/ModalLogIn';
 import { logoutThunk } from '../../redux/Auth/AuthThunk';
 import {
+  AuthWrapper,
   BtnLogIn,
   BtnRegister,
   BtnWrapper,
   HeaderWrapper,
   LogInSvg,
+  LogOutSvg,
   LogoHeader,
   LogoWrapper,
   NavStyled,
@@ -50,10 +52,13 @@ const Header = () => {
           </SiteNav>
 
           {isAuth ? (
-            <>
-              <p>{`Hello ${userName}`}</p>
-              <button onClick={handleLogout}>Exit</button>
-            </>
+            <AuthWrapper>
+              <p>{`${userName}`}</p>
+              <BtnLogIn onClick={handleLogout}>
+                <LogOutSvg />
+                Log Out
+              </BtnLogIn>
+            </AuthWrapper>
           ) : (
             <BtnWrapper>
               <BtnLogIn

@@ -1,21 +1,21 @@
 import styled from 'styled-components';
 
 export const StyledButton = styled.button`
-  padding: ${({ theme }) => theme.spacing(2)};
-  border: 1px solid ${({ theme }) => theme.colors.primary};
-  background-color: ${({ theme }) => theme.colors.secondary};
-  color: ${({ theme }) => theme.colors.white};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: ${({ theme }) => theme.borders.none};
+  border-radius: ${({ theme }) => theme.radii.button};
+  background: #121417;
   cursor: pointer;
+  color: ${({ theme }) => theme.colors.white};
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+  transition: background 0.3s ease;
 
-  ${({ size }) =>
-    size === 'small' &&
-    `
-    width: ${({ theme }) => theme.spacing(4)};
-  `}
-
-  ${({ color }) =>
-    color === 'red' &&
-    `
-    background-color: red;
-  `}
+  &:hover,
+  &:focus {
+    background: ${({ theme }) => theme.colors.green};
+  }
 `;
