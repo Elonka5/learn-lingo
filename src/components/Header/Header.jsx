@@ -18,6 +18,7 @@ import {
   SiteNav,
   StyledNavLink,
 } from './HeaderStyled';
+import { removeFromFavorite } from '../../redux/Favorite/FavoriteSlice';
 
 const Header = () => {
   const isAuth = useSelector(selectIsLoggedIn);
@@ -27,6 +28,7 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(logoutThunk());
+    dispatch(removeFromFavorite());
   };
 
   return (

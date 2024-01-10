@@ -54,6 +54,8 @@ export const StyledNav = styled(Link)`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.green};
   border-radius: ${({ theme }) => theme.radii.button};
+  margin-left: auto;
+  margin-right: auto;
 
   font-size: ${({ theme }) => theme.fontSizes.l};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
@@ -70,5 +72,11 @@ export const FavoriteDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: ${({ theme }) => theme.spacing(4)};
+  gap: ${({ theme }) => theme.spacing(5)};
+
+  img {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;

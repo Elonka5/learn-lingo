@@ -1,19 +1,17 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import {
   selectFavoriteTeacher,
   selectTeachersLoading,
 } from '../../redux/selectors';
-import TeacherCard from '../TeacherCard/TeacherCard';
 import { TeachersList } from '../TeacherCatalog/TeacherCatalogStyled';
 import { FavoriteDiv, StyledNav, Title } from '../Hero/Hero.styled';
+import TeacherCard from '../TeacherCard/TeacherCard';
 import favImg from '../../assets/images/favorite_img.png';
 import Loader from '../Loader/Loader';
 
 const FavoriteTeacher = () => {
   const isFavorite = useSelector(selectFavoriteTeacher);
   const isLoading = useSelector(selectTeachersLoading);
-  console.log(isFavorite);
 
   return (
     <>
@@ -22,10 +20,13 @@ const FavoriteTeacher = () => {
       ) : isFavorite.length === 0 ? (
         <FavoriteDiv>
           <Title style={{ textAlign: 'center', marginBottom: '0' }}>
-            You don't have any favorite <span>teacher</span> yet
+            You don't have any favorite{' '}
+            <span style={{ width: '168px' }}>teacher</span> yet
           </Title>{' '}
           <img src={favImg} alt="hero_image" loading="lazy" />
-          <StyledNav to="/catalog">Go to Catalog</StyledNav>
+          <StyledNav to="/catalog" style={{ width: '288px' }}>
+            Go to Catalog
+          </StyledNav>
         </FavoriteDiv>
       ) : (
         <TeachersList>

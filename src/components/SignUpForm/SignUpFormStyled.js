@@ -76,5 +76,5 @@ export const ToggleBtn = styled.button`
 
 export const WrapperInput = styled.div`
   position: relative;
-  margin-bottom: ${({ marginBottom, theme }) => theme.spacing(marginBottom)};
+  margin-bottom: ${({ theme }) => theme.spacing(4.5)};
 `;

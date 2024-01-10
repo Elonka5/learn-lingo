@@ -51,7 +51,7 @@ const SignUpForm = () => {
         {({ errors, touched }) => {
           return (
             <FormWrapper>
-              <WrapperInput marginBottom={4.5}>
+              <WrapperInput>
                 <StyledInput
                   type="email"
                   name="email"
@@ -60,7 +60,7 @@ const SignUpForm = () => {
                 />
                 <StyledError name="email" component="span" />
               </WrapperInput>
-              <WrapperInput marginBottom={10}>
+              <WrapperInput style={{ marginBottom: '40px' }}>
                 <StyledInput
                   $error={errors.password && touched.password}
                   type={showPassword ? 'text' : 'password'}

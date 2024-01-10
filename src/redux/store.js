@@ -14,6 +14,7 @@ import storage from 'redux-persist/lib/storage';
 import { teacherReducer } from './Teachers/TeachersSlice';
 import { favoriteReducer } from './Favorite/FavoriteSlice';
 import { filterReducer } from './filterSlice';
+import { usersReducer } from './Auth/UserSlice';
 
 const persistUserConfig = {
   key: 'auth',
@@ -39,6 +40,7 @@ const store = configureStore({
     teachers: teacherReducer,
     favorite: persistedFavorite,
     filter: filterReducer,
+    users: usersReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

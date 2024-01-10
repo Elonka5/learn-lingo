@@ -53,7 +53,7 @@ const SignInForm = () => {
         {({ errors, touched }) => {
           return (
             <FormWrapper>
-              <WrapperInput marginBottom={4.5}>
+              <WrapperInput>
                 <StyledInput
                   $error={errors.name && touched.name}
                   type="text"
@@ -62,7 +62,7 @@ const SignInForm = () => {
                 />
                 <StyledError name="name" component="span" />
               </WrapperInput>
-              <WrapperInput marginBottom={4.5}>
+              <WrapperInput>
                 <StyledInput
                   $error={errors.email && touched.email}
                   type="email"
@@ -71,7 +71,7 @@ const SignInForm = () => {
                 />
                 <StyledError name="email" component="span" />
               </WrapperInput>
-              <WrapperInput marginBottom={10}>
+              <WrapperInput style={{ marginBottom: '40px' }}>
                 <StyledInput
                   $error={errors.password && touched.password}
                   type={showPassword ? 'text' : 'password'}

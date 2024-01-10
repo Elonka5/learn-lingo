@@ -4,7 +4,6 @@ import { IoMdHeartEmpty } from 'react-icons/io';
 import { IoMdHeart } from 'react-icons/io';
 import {
   AddMore,
-  BtnTrial,
   Card,
   CommentText,
   CommentsWrapper,
@@ -28,6 +27,9 @@ import { generateUniqueAvatar } from '../../helpers/Avatar';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFavoriteTeacher, selectIsLoggedIn } from '../../redux/selectors';
 import { handleSwitchFavorite } from '../../helpers/handleSwitchFavorite';
+import ModalBookTrial from '../ModalBookTrial/ModalBookTrial';
+import { useModal } from '../ModalContext/ModalContextProvider';
+import Button from '../Button/Button';
 
 const TeacherCard = ({ teacher }) => {
   const {
@@ -50,6 +52,7 @@ const TeacherCard = ({ teacher }) => {
 
   const isFavorite = useSelector(selectFavoriteTeacher);
   const isAuth = useSelector(selectIsLoggedIn);
+  const toggleModal = useModal();
 
   const isFavoriteTeacher = isFavorite.some(item => item.id === id);
 
@@ -160,7 +163,25 @@ const TeacherCard = ({ teacher }) => {
               ))}
             </ul>
           </LevelWrapper>
-          {showMore && <BtnTrial>Book trial lesson</BtnTrial>}
+          {showMore && (
+            <Button
+              text="Book trial lesson"
+              variant="book"
+              type="button"
+              onClick={() =>
+                toggleModal(
+                  <ModalBookTrial
+                    size="medium"
+                    title="Book trial lesson"
+                    name={name}
+                    surname={surname}
+                    avatar_url={avatar_url}
+                    id={id}
+                  />
+                )
+              }
+            />
+          )}
         </DescrTeacherWrapper>
       </WrapperCard>
     </Card>

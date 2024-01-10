@@ -46,6 +46,7 @@ export const theme = {
 
   lineHeights: {
     normal: 1.2,
+    medium: 1.33,
     upperCase: 1.8,
   },
 
@@ -53,6 +54,7 @@ export const theme = {
     none: 'none',
     normal: '1px solid',
     medium: '2px dashed ',
+    mSolid: '2px solid',
     large: '3px solid',
   },
 
