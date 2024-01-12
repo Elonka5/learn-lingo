@@ -4,19 +4,35 @@ import { modalSizes } from '../../constants/modalSizes';
 const getSize = (size, screen) => modalSizes[screen][size];
 
 export const DivModalBox = styled.div`
-  color: #000;
-  background-color: #fff;
+  color: ${({ theme }) => theme.colors.primaryBlack};
+  background-color: ${({ theme }) => theme.colors.white};
   width: 280px;
+  height: 100%;
   padding: ${({ $size }) => ($size === 'small' ? '32px 24px' : '32px 12px')};
-  border-radius: 30px;
+  border-radius: ${({ theme }) => theme.radii.medium};
+  transform: translateX(-0%) translateY(20%);
+  overflow-y: scroll;
 
   @media screen and (min-width: 768px) {
     width: ${({ $size }) => getSize($size, 'md')}px;
-    padding: 20px 20px 64px 64px;
-    border-radius: 10px;
+    padding: ${({ theme }) =>
+      `${theme.spacing(5)} ${theme.spacing(5)} ${theme.spacing(
+        16
+      )} ${theme.spacing(16)}`};
   }
   @media screen and (min-width: 1440px) {
     width: ${({ $size }) => getSize($size, 'xl')}px;
+  }
+
+  &::-webkit-scrollbar {
+    width: ${({ theme }) => theme.spacing(2)};
+    border-radius: ${({ theme }) => theme.radii.small};
+    background-color: ${({ theme }) => theme.colors.white};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.colors.green};
+    border-radius: ${({ theme }) => theme.radii.small};
   }
 `;
 

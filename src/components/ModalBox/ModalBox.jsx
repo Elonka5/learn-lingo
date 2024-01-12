@@ -10,7 +10,7 @@ const ModalBox = ({ children, title, size, isLogoModal = false }) => {
       {!isLogoModal && (
         <DivTitleWrapper>
           <h2>{title}</h2>
-          <IoMdClose onClick={() => toggleModal()} />
+          <IoMdClose aria-label="close_button" onClick={() => toggleModal()} />
         </DivTitleWrapper>
       )}
       {children}

@@ -4,7 +4,7 @@ export const StyledButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px 88px;
+  padding: ${({ theme }) => `${theme.spacing(4)} ${theme.spacing(9.22)}`};
   border: ${({ theme }) => theme.borders.none};
   border-radius: ${({ theme }) => theme.radii.button};
   background-color: ${({ theme }) => theme.colors.green};
@@ -12,7 +12,7 @@ export const StyledButton = styled.button`
   font-size: ${({ theme }) => theme.fontSizes.l};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   line-height: 20px; /* 155.556% */
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease-in-out;
   cursor: pointer;
 
   &:hover,
@@ -40,30 +40,8 @@ export const StyledButton = styled.button`
     `}
 
       ${({ $variant }) =>
-    $variant === 'third' &&
+    $variant === 'modalbook' &&
     css`
-      width: ${({ theme }) => theme.spacing(17.5)};
-      height: ${({ theme }) => theme.spacing(7.5)};
+      padding: ${({ theme }) => `${theme.spacing(4)} ${theme.spacing(54)}`};
     `}
-`;
-
-export const BtnRegister = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 39px;
-  border: none;
-  border-radius: ${({ theme }) => theme.radii.button};
-  background: #121417;
-  cursor: pointer;
-  color: ${({ theme }) => theme.colors.white};
-  font-size: ${({ theme }) => theme.fontSizes.m};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  line-height: ${({ theme }) => theme.lineHeights.normal};
-  transition: background-color 0.3s ease;
-
-  &:hover,
-  &:focus {
-    background-color: ${({ theme }) => theme.colors.green};
-  }
 `;

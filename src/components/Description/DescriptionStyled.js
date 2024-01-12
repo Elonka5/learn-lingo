@@ -2,18 +2,32 @@ import styled from 'styled-components';
 
 export const DescrWrapper = styled.ul`
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column;
   border-radius: ${({ theme }) => theme.radii.medium};
   border: ${({ theme }) => `${theme.borders.medium} ${theme.colors.green}`};
-  width: ${({ theme }) => theme.spacing(328)};
-  height: ${({ theme }) => theme.spacing(29)};
-  padding: ${({ theme }) => `${theme.spacing(10)} ${theme.spacing(30)}`};
-  gap: ${({ theme }) => theme.spacing(25)};
+  padding: ${({ theme }) => `${theme.spacing(8)} ${theme.spacing(9)}`};
+  gap: ${({ theme }) => theme.spacing(8)};
 
   li {
     display: flex;
     gap: ${({ theme }) => theme.spacing(4)};
+    justify-content: space-between;
+  }
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+
+  @media screen and (min-width: 1440px) {
+    align-items: center;
+    flex-wrap: wrap;
+    width: ${({ theme }) => theme.spacing(328)};
+    height: ${({ theme }) => theme.spacing(29)};
+    padding: ${({ theme }) => `${theme.spacing(10)} ${theme.spacing(30)}`};
+    gap: ${({ theme }) => theme.spacing(25)};
+
+    li {
+    }
   }
 `;
 

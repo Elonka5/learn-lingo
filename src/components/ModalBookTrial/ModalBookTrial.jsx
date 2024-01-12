@@ -28,6 +28,7 @@ const initialState = {
   reason: '',
   selectedTeacherId: null,
 };
+
 const ModalBookTrial = ({ id, name, surname, avatar_url }) => {
   const toggleModal = useModal();
   const dispatch = useDispatch();
@@ -148,7 +149,7 @@ const ModalBookTrial = ({ id, name, surname, avatar_url }) => {
                 <StyledError name="phone" component="span" />{' '}
               </WrapperInput>
             </StyledWrapperForm>
-            <Button type="submit">Book</Button>
+            <Button type="submit" text="Book" variant="modalbook" />
           </StyledForm>
         )}
       </Formik>

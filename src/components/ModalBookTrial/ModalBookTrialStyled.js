@@ -109,13 +109,6 @@ export const StyledLabel = styled.label`
   }
 `;
 
-// export const StyledError = styled.div`
-//   color: var(--red);
-//   font-family: 'Roboto', sans-serif;
-//   font-size: 13px;
-//   line-height: 1.37;
-// `;
-
 export const StyledWrapperForm = styled.div`
   display: flex;
   flex-direction: column;

@@ -171,7 +171,7 @@ const TeacherCard = ({ teacher }) => {
               onClick={() =>
                 toggleModal(
                   <ModalBookTrial
-                    size="medium"
+                    size="big"
                     title="Book trial lesson"
                     name={name}
                     surname={surname}

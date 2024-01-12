@@ -18,12 +18,6 @@ export const languages = [
   'Vietnamese',
 ];
 
-// export const sortedMakes = [...makes].sort((a, b) =>
-//   a.label.toLowerCase().localeCompare(b.label.toLowerCase())
-// );
-
-// export const pricePoints = [25, 27, 28, 30, 32, 35];
-
 export const pricePoints = [
   { value: '', label: 'All' },
   { value: 25, label: '25' },
@@ -32,6 +26,4 @@ export const pricePoints = [
   { value: 30, label: '30' },
   { value: 32, label: '32' },
   { value: 35, label: '35' },
-
-  // Додайте інші опції за потребою
 ];
