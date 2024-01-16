@@ -11,17 +11,17 @@ import { ThemeProvider } from 'styled-components';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <React.StrictMode>
-  <ThemeProvider theme={theme}>
-    <Provider store={store}>
-      <PersistGate persistor={persistedStore}>
-        <BrowserRouter basename="/learn-lingo">
-          <App />
-        </BrowserRouter>
-      </PersistGate>
-    </Provider>
-  </ThemeProvider>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <PersistGate persistor={persistedStore}>
+          <BrowserRouter basename="/learn-lingo">
+            <App />
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
+    </ThemeProvider>
+  </React.StrictMode>
 );
 
 reportWebVitals();
