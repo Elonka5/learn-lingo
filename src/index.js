@@ -11,12 +11,11 @@ import { theme } from './services/styles/theme';
 import { ThemeProvider } from 'styled-components';
 // import './firebase/firebase';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <Provider store={store}>
-        <PersistGate persistor={persistedStore}>
+        <PersistGate loading={null} persistor={persistedStore}>
           <BrowserRouter basename="/learn-lingo">
             <App />
           </BrowserRouter>
