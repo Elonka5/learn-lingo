@@ -23,7 +23,7 @@ const FavoriteTeacher = () => {
             You don't have any favorite{' '}
             <span style={{ width: '168px' }}>teacher</span> yet
           </Title>{' '}
-          <img src={favImg} alt="hero_image" loading="lazy" />
+          <img src={favImg} alt="favorite_image" loading="lazy" />
           <StyledNav to="/catalog" style={{ width: '288px' }}>
             Go to Catalog
           </StyledNav>

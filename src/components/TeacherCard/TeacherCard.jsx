@@ -4,6 +4,7 @@ import { IoMdHeartEmpty } from 'react-icons/io';
 import { IoMdHeart } from 'react-icons/io';
 import {
   AddMore,
+  BtnFavorite,
   Card,
   CommentText,
   CommentsWrapper,
@@ -13,10 +14,13 @@ import {
   LangWrapper,
   LessonWrapper,
   LevelWrapper,
+  NameLangWrapper,
   ReviewList,
   ReviewWrapper,
   StyledPrice,
   StyledSpan,
+  StyledTextLang,
+  TeacherStatus,
   TextTitle,
   TitleName,
   WrapperCard,
@@ -25,11 +29,10 @@ import {
 import { useState } from 'react';
 import { generateUniqueAvatar } from '../../helpers/Avatar';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFavoriteTeacher, selectIsLoggedIn } from '../../redux/selectors';
-import { handleSwitchFavorite } from '../../helpers/handleSwitchFavorite';
 import ModalBookTrial from '../ModalBookTrial/ModalBookTrial';
 import { useModal } from '../ModalContext/ModalContextProvider';
 import Button from '../Button/Button';
+import { toggleFavoriteTeacherThunk } from '../../helpers/handle';
 
 const TeacherCard = ({ teacher }) => {
   const {
@@ -50,11 +53,17 @@ const TeacherCard = ({ teacher }) => {
 
   const [showMore, setShowMore] = useState(false);
 
-  const isFavorite = useSelector(selectFavoriteTeacher);
-  const isAuth = useSelector(selectIsLoggedIn);
-  const toggleModal = useModal();
+  // const isFavorite = useSelector(selectFavoriteTeacher);
+  const userId = useSelector(state => state.auth.userId);
+ 
 
-  const isFavoriteTeacher = isFavorite.some(item => item.id === id);
+  // const isAuth = useSelector(selectIsLoggedIn);
+  const toggleModal = useModal();
+  const favorites = useSelector(state => state.auth.favorites);
+
+  // const isFavoriteTeach = favorites && favorites[teacher.id];
+
+  const isFavoriteTeach = favorites && favorites[teacher.id] !== undefined;
 
   const dispatch = useDispatch();
 
@@ -62,63 +71,72 @@ const TeacherCard = ({ teacher }) => {
     setShowMore(!showMore);
   };
 
-  const handleSwitchFavoriteWrapper = () => {
-    const teacherData = { ...teacher };
 
-    handleSwitchFavorite(isAuth, isFavorite, dispatch, teacherData);
+  const handleDelete = () => {
+    dispatch(toggleFavoriteTeacherThunk({ userId, teacher }));
   };
 
   return (
     <Card key={id}>
       <WrapperCard>
         <WrapperImg>
+          <TeacherStatus />
           <img src={avatar_url} alt="avatar" />
         </WrapperImg>
         <DescrTeacherWrapper>
-          <LangWrapper>
-            <p>Languages</p>
-            <ul>
-              <li>
-                <IoBookOutline />
-                Lessons online
-              </li>
-              <StyledSpan>|</StyledSpan>
-              <li>Lessons done: {lessons_done}</li>
-              <StyledSpan>|</StyledSpan>
-              <li>
-                <FaStar fill="#FFC531" />
-                Rating: {rating}
-              </li>
-              <StyledSpan>|</StyledSpan>
-              <li>
-                Price / 1 hour: <StyledPrice>{price_per_hour}$</StyledPrice>
-              </li>
-            </ul>
-            <button onClick={handleSwitchFavoriteWrapper}>
-              {isFavoriteTeacher ? (
-                <IoMdHeart fill="#FFC531" />
-              ) : (
-                <IoMdHeartEmpty />
-              )}
-            </button>
-          </LangWrapper>
-          <TitleName>
-            {name} {surname}
-          </TitleName>
+          <NameLangWrapper>
+            <LangWrapper>
+              <h3>Languages</h3>
+              <ul>
+                <li>
+                  <IoBookOutline />
+                  <StyledTextLang>Lessons online</StyledTextLang>
+                  <StyledSpan>|</StyledSpan>
+                </li>
+                <li>
+                  <StyledTextLang>Lessons done: {lessons_done} </StyledTextLang>
+                  <StyledSpan>|</StyledSpan>
+                </li>
+
+                <li>
+                  <FaStar fill="#FFC531" />
+                  <StyledTextLang>Rating: {rating}</StyledTextLang>
+                  <StyledSpan>|</StyledSpan>
+                </li>
+
+                <li>
+                  <StyledTextLang>Price / 1 hour: </StyledTextLang>{' '}
+                  <StyledPrice>{price_per_hour} $ </StyledPrice>
+                </li>
+              </ul>
+            </LangWrapper>
+            <TitleName>
+              {name} {surname}
+            </TitleName>
+          </NameLangWrapper>
+          <BtnFavorite onClick={handleDelete}>
+            {isFavoriteTeach ? (
+              <IoMdHeart fill="#FFC531" />
+            ) : (
+              <IoMdHeartEmpty />
+            )}
+          </BtnFavorite>
           <LessonWrapper>
             <ul>
               <DescriptionText>
-                <TextTitle>Speaks:</TextTitle>{' '}
-                <p>
-                  <span> {languages.join(',')}</span>
-                </p>
+                <TextTitle>
+                  Speaks: <span> {languages.join(',')}</span>
+                </TextTitle>
               </DescriptionText>
               <DescriptionText>
-                <TextTitle>Lesson Info:</TextTitle>
-                <p>{lesson_info}</p>
+                <TextTitle>
+                  Lesson Info:<span>{lesson_info}</span>
+                </TextTitle>
               </DescriptionText>
               <DescriptionText>
-                <TextTitle>Conditions:</TextTitle> <p>{conditions}</p>
+                <TextTitle>
+                  Conditions:<span>{conditions}</span>
+                </TextTitle>
               </DescriptionText>
             </ul>
           </LessonWrapper>
@@ -139,7 +157,7 @@ const TeacherCard = ({ teacher }) => {
                         />
                         <CommentsWrapper>
                           <p>{review.reviewer_name}</p>
-                          <p>
+                          <p style={{ color: '#121417' }}>
                             <FaStar fill="#FFC531" />
                             {review.reviewer_rating}.0
                           </p>

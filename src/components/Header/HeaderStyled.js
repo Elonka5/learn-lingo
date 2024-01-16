@@ -9,6 +9,7 @@ export const HeaderWrapper = styled.div`
   padding: ${({ theme }) => `${theme.spacing(5)} ${theme.spacing(4)}`};
 
   @media screen and (min-width: 768px) {
+    width: ${({ theme }) => theme.spacing(140)};
   }
 
   @media screen and (min-width: 1440px) {

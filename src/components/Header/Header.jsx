@@ -9,7 +9,7 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import Navigation from '../Navigation/Navigation';
 
 const Header = () => {
-  const isMobilesize = useMediaQuery({ query: '(max-width:767.9px)' });
+  const isMobilesize = useMediaQuery({ query: '(max-width:1339.9px)' });
 
   return (
     <header>

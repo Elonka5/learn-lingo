@@ -7,11 +7,12 @@ export const DivModalBox = styled.div`
   color: ${({ theme }) => theme.colors.primaryBlack};
   background-color: ${({ theme }) => theme.colors.white};
   width: 280px;
-  height: 100%;
   padding: ${({ $size }) => ($size === 'small' ? '32px 24px' : '32px 12px')};
   border-radius: ${({ theme }) => theme.radii.medium};
-  transform: translateX(-0%) translateY(20%);
+  transform: translateX(-0%) translateY(8%);
+  height: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
 
   @media screen and (min-width: 768px) {
     width: ${({ $size }) => getSize($size, 'md')}px;
@@ -22,6 +23,9 @@ export const DivModalBox = styled.div`
   }
   @media screen and (min-width: 1440px) {
     width: ${({ $size }) => getSize($size, 'xl')}px;
+    overflow-y: scroll;
+    height: 100%;
+    transform: translateX(-0%) translateY(20%);
   }
 
   &::-webkit-scrollbar {

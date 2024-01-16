@@ -16,6 +16,8 @@ export const DescrWrapper = styled.ul`
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
   @media screen and (min-width: 1440px) {
@@ -36,6 +38,12 @@ export const TitleDescription = styled.p`
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   line-height: 32px; /* 114.286% */
   letter-spacing: -0.56px;
+
+  @media screen and (min-width: 768px) {
+  }
+
+  @media screen and (min-width: 1440px) {
+  }
 `;
 
 export const TextDescription = styled.p`

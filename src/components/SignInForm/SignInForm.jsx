@@ -5,7 +5,6 @@ import { FiEyeOff } from 'react-icons/fi';
 import { FiEye } from 'react-icons/fi';
 import { Formik } from 'formik';
 import {
-  Btn,
   FormWrapper,
   ModalText,
   StyledError,
@@ -15,9 +14,10 @@ import {
 } from '../SignUpForm/SignUpFormStyled';
 import { validationSignIn } from '../../helpers/schemas';
 import { useState } from 'react';
+import Button from '../Button/Button';
 
 const initialState = {
-  name: '',
+  displayName: '',
   email: '',
   password: '',
 };
@@ -34,7 +34,7 @@ const SignInForm = () => {
   };
 
   const handlerSubmit = (values, { resetForm }) => {
-    dispatch(registerThunk(values));
+    dispatch(registerThunk({ ...values, favorites: {} }));
     toggleModal();
     resetForm();
   };
@@ -55,12 +55,12 @@ const SignInForm = () => {
             <FormWrapper>
               <WrapperInput>
                 <StyledInput
-                  $error={errors.name && touched.name}
+                  $error={errors.displayName && touched.displayName}
                   type="text"
-                  name="name"
+                  name="displayName"
                   placeholder="Name"
                 />
-                <StyledError name="name" component="span" />
+                <StyledError name="displayName" component="span" />
               </WrapperInput>
               <WrapperInput>
                 <StyledInput
@@ -83,7 +83,7 @@ const SignInForm = () => {
                 </ToggleBtn>
                 <StyledError name="password" component="span" />
               </WrapperInput>
-              <Btn type="submit">Register</Btn>
+              <Button type="submit" text="Registration" />
             </FormWrapper>
           );
         }}

@@ -3,7 +3,6 @@ import { useModal } from '../ModalContext/ModalContextProvider';
 import { useDispatch } from 'react-redux';
 import { loginThunk } from '../../redux/Auth/AuthThunk';
 import {
-  Btn,
   FormWrapper,
   ModalText,
   StyledError,
@@ -15,6 +14,7 @@ import { FiEyeOff } from 'react-icons/fi';
 import { FiEye } from 'react-icons/fi';
 import { Formik } from 'formik';
 import { validationSignUp } from '../../helpers/schemas';
+import Button from '../Button/Button';
 
 const initialState = {
   email: '',
@@ -72,7 +72,7 @@ const SignUpForm = () => {
                 </ToggleBtn>
                 <StyledError name="password" component="span" />
               </WrapperInput>
-              <Btn type="submit">Log In</Btn>
+              <Button type="submit" text="Log in" />
             </FormWrapper>
           );
         }}

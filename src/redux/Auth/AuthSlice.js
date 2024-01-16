@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loginThunk, logoutThunk, registerThunk } from './AuthThunk';
+import { getFavoritesTeachers } from '../Favorite/FavoriteThunk';
 
 const initialState = {
   userId: null,
@@ -8,6 +9,7 @@ const initialState = {
   isLoading: false,
   error: null,
   isLoggedIn: false,
+  favorites: {},
 };
 
 const authSlice = createSlice({
@@ -21,6 +23,16 @@ const authSlice = createSlice({
       name: payload.name,
       isLoggedIn: true,
     }),
+    setUserFavorites: (state, { payload }) => ({
+      ...state,
+      favorites: payload,
+    }),
+    clearUserData: state => {
+      return {
+        ...initialState, // Скидуємо до початкового стану
+        favorites: {},
+      };
+    },
   },
   extraReducers: builder => {
     builder
@@ -54,6 +66,9 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = payload;
       })
+      .addCase(getFavoritesTeachers.fulfilled, (state, { payload }) => {
+        state.favorites = payload;
+      })
       .addCase(logoutThunk.pending, (state, { payload }) => {
         state.isLoading = true;
       })
@@ -67,10 +82,29 @@ const authSlice = createSlice({
       .addCase(logoutThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
+      })
+      .addCase('UPDATE_FAVORITES_AFTER_ADDITION', (state, action) => {
+        const { id } = action.payload;
+        return {
+          ...state,
+          favorites: {
+            ...state.favorites,
+            [id]: action.payload,
+          },
+        };
+      })
+      .addCase('UPDATE_FAVORITES_AFTER_REMOVAL', (state, action) => {
+        const updatedFavorites = { ...state.favorites };
+        delete updatedFavorites[action.payload];
+        return {
+          ...state,
+          favorites: updatedFavorites,
+        };
       });
   },
 });
 
 export const authReducer = authSlice.reducer;
 
-export const { getCurrentUser } = authSlice.actions;
+export const { getCurrentUser, setUserFavorites, clearUserData } =
+  authSlice.actions;

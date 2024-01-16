@@ -18,8 +18,12 @@ const favoriteSlice = createSlice({
         teacher => teacher.id !== payload.id
       );
     },
+    clearFavorite(state) {
+      state.favoriteList = [];
+    },
   },
 });
 
 export const favoriteReducer = favoriteSlice.reducer;
-export const { addFavorite, removeFromFavorite } = favoriteSlice.actions;
+export const { addFavorite, removeFromFavorite, clearFavorite } =
+  favoriteSlice.actions;

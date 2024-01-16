@@ -14,7 +14,6 @@ import { LoadMoreBtn } from '../../components/TeacherCatalog/TeacherCatalogStyle
 const Teachers = () => {
   const [visibleTeachers, setVisibleTeachers] = useState(4);
   const filteredTeachers = useSelector(selectFilteredTeachers);
-  console.log(filteredTeachers);
   const isLoading = useSelector(selectTeachersLoading);
 
   const dispatch = useDispatch();

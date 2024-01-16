@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 export const validationSignIn = yup.object().shape({
-  name: yup
+  displayName: yup
     .string()
     .required('name is required')
     .max(12, 'the name must containe maximum of 12 characters')

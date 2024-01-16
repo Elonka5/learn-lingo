@@ -14,10 +14,10 @@ export const HeroWrapper = styled.div`
   }
 
   @media screen and (min-width: 768px) {
-    flex-direction: row;
   }
 
   @media screen and (min-width: 1440px) {
+    flex-direction: row;
   }
 `;
 
@@ -36,6 +36,8 @@ export const TitleWrapper = styled.div`
   }
 
   @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
   }
 
   @media screen and (min-width: 1440px) {
@@ -116,7 +118,7 @@ export const FavoriteDiv = styled.div`
   gap: ${({ theme }) => theme.spacing(5)};
 
   img {
-    width: 400px;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
   }
@@ -124,5 +126,10 @@ export const FavoriteDiv = styled.div`
   @media screen and (min-width: 768px) {
   }
   @media screen and (min-width: 1440px) {
+    img {
+      width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 `;

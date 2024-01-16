@@ -2,9 +2,19 @@ import styled from 'styled-components';
 
 export const SelectWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: ${({ theme }) => theme.spacing(5)};
   margin-bottom: ${({ theme }) => theme.spacing(8)};
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  @media screen and (min-width: 1440px) {
+    gap: ${({ theme }) => theme.spacing(5)};
+    margin-bottom: ${({ theme }) => theme.spacing(8)};
+  }
 `;
 
 export const LabWrap = styled.label`

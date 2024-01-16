@@ -4,7 +4,15 @@ import { Form, Field, ErrorMessage } from 'formik';
 export const FormWrapper = styled(Form)`
   display: flex;
   flex-direction: column;
-  width: ${({ theme }) => theme.spacing(109.5)};
+  width: ${({ theme }) => theme.spacing(64)};
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+
+  @media screen and (min-width: 1440px) {
+    width: ${({ theme }) => theme.spacing(109.5)};
+  }
 `;
 
 export const StyledInput = styled(Field)`
@@ -17,7 +25,7 @@ export const StyledInput = styled(Field)`
     ${({ theme, $error }) =>
       $error ? theme.colors.red : theme.colors.inputBorder};
 
-  width: ${({ theme }) => theme.spacing(109.5)};
+  width: ${({ theme }) => theme.spacing(64)};
   appearance: none;
   outline: none;
 
@@ -25,6 +33,23 @@ export const StyledInput = styled(Field)`
     color: ${({ $error, theme }) =>
       $error ? theme.colors.star : theme.colors.red};
     transition: color 0.3s ease-in-out;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 100%;
+  }
+
+  @media screen and (min-width: 1440px) {
+    padding: ${({ theme }) => `${theme.spacing(4)} ${theme.spacing(4.5)}`};
+    width: ${({ theme }) => theme.spacing(109.5)};
+    appearance: none;
+    outline: none;
+
+    ::placeholder {
+      color: ${({ $error, theme }) =>
+        $error ? theme.colors.star : theme.colors.red};
+      transition: color 0.3s ease-in-out;
+    }
   }
 `;
 
@@ -44,22 +69,6 @@ export const StyledError = styled(ErrorMessage)`
   display: block;
   font-size: ${({ theme }) => theme.fontSizes.xs};
   line-height: 18px;
-`;
-
-export const Btn = styled.button`
-  display: flex;
-  padding: ${({ theme }) => `${theme.spacing(4)} ${theme.spacing(40)}`};
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ theme }) => theme.colors.green};
-  border-radius: ${({ theme }) => theme.radii.button};
-  border: ${({ theme }) => theme.borders.none};
-  cursor: pointer;
-
-  color: ${({ theme }) => theme.colors.primaryBlack};
-  font-size: ${({ theme }) => theme.fontSizes.l};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  line-height: 28px; /* 155.556% */
 `;
 
 export const ToggleBtn = styled.button`
