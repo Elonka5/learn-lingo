@@ -2,7 +2,7 @@
   "name": "learn-lingo",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://elonka5.github.io/learn-lingo/",
+  "homepage": "https://Elonka5.github.io/learn-lingo/",
   "dependencies": {
     "@dicebear/collection": "^5.3.5",
     "@dicebear/core": "^5.3.5",
