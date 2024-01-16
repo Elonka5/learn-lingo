@@ -9,6 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 import { theme } from './services/styles/theme';
 import { ThemeProvider } from 'styled-components';
+import './firebase/firebase';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
