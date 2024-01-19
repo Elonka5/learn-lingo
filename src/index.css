@@ -1,5 +1,5 @@
 /* @import '../src/services/stylesheet/fonts.css'; */
-/* @import 'modern-normalize';
+@import 'modern-normalize';
 
 body {
   margin: 0;
@@ -51,4 +51,4 @@ Link {
 
 a {
   text-decoration: none;
-} */
+}
