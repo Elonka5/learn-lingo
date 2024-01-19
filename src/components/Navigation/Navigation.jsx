@@ -21,11 +21,12 @@ import {
 } from './NavigationStyled';
 import { clearUserData } from '../../redux/Auth/AuthSlice';
 import { useEffect } from 'react';
-import AvatarUploader from '../ModalSettings/AvatarUploader';
+import ModalSettings from '../ModalSettings/ModalSettings';
 
 const Navigation = ({ closeBurgerMenu }) => {
   const isAuth = useSelector(selectIsLoggedIn);
   const userName = useSelector(selectUserName);
+  console.log('userName:', userName);
   const userAvatar = useSelector(state => state.auth.photoURL);
   console.log(userAvatar);
 
@@ -37,6 +38,10 @@ const Navigation = ({ closeBurgerMenu }) => {
       dispatch(clearUserData());
     }
   }, [isAuth, dispatch]);
+
+  useEffect(() => {
+    console.log('User Data:', userName, userAvatar);
+  }, [userName, userAvatar]);
 
   const handleLogout = () => {
     dispatch(logoutThunk());
@@ -63,15 +68,17 @@ const Navigation = ({ closeBurgerMenu }) => {
 
       {isAuth ? (
         <AuthWrapper>
-          <UserName>
-            <UserSvg />
-            {`${userName}`}
-          </UserName>
-          <img src={userAvatar} alt="user_avatar" />
+          {userName && (
+            <UserName>
+              <UserSvg />
+              {`${userName}`}
+            </UserName>
+          )}
+          {userAvatar && <img src={userAvatar} alt="user_avatar" />}
           <button
             onClick={() => {
               toggleModal(
-                <AvatarUploader size="medium" title="Your Settings" />
+                <ModalSettings size="medium" title="Your Settings" />
               );
             }}
           >

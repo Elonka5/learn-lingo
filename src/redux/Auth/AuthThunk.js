@@ -1,8 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
+  EmailAuthProvider,
   createUserWithEmailAndPassword,
+  reauthenticateWithCredential,
   signInWithEmailAndPassword,
   signOut,
+  updatePassword,
   updateProfile,
 } from 'firebase/auth';
 import { auth, db, storage } from '../../firebase/firebase';
@@ -149,34 +152,41 @@ export const loadUserFavoritesThunk = createAsyncThunk(
   }
 );
 
-export const updateDisplayName = createAsyncThunk(
+export const updateDisplayNameAsync = createAsyncThunk(
   'user/updateDisplayName',
-  async (newDisplayName, { getState, getFirebase }) => {
-    const firebase = getFirebase();
-    const user = firebase.auth().currentUser;
-
-    await user.updateProfile({
-      displayName: newDisplayName,
-    });
-
-    return newDisplayName;
+  async ({ userId, displayName }) => {
+    try {
+      const userRef = ref(db, `users/${userId}`);
+      await update(userRef, { displayName });
+      return displayName;
+    } catch (error) {
+      console.error('Помилка при оновленні імені користувача:', error);
+      throw error;
+    }
   }
 );
 
+export const changePasswordAsync = createAsyncThunk(
+  'auth/changePassword',
+  async ({ oldPassword, newPassword }, { rejectWithValue }) => {
+    try {
+      const user = auth.currentUser;
 
-export const updatePassword = createAsyncThunk(
-  'user/updatePassword',
-  async (newPassword, { getState, getFirebase }) => {
-    const firebase = getFirebase();
-    const user = firebase.auth().currentUser;
+      if (!user) {
+        throw new Error('Not authorized.');
+      }
 
-    await user.updatePassword(newPassword);
+      const credentials = EmailAuthProvider.credential(user.email, oldPassword);
+      await reauthenticateWithCredential(user, credentials);
 
-    return null; 
+      await updatePassword(user, newPassword);
+
+      return 'Passord succesfully changed.';
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
-
-
 
 export const updateAvatar = createAsyncThunk(
   'auth/updateAvatar',

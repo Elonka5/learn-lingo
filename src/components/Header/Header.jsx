@@ -14,7 +14,7 @@ const Header = () => {
   const [isBurgerMenuActive, setBurgerMenuActive] = useState(true);
 
   const closeBurgerMenu = () => {
-    setBurgerMenuActive(false);
+    setBurgerMenuActive(!isBurgerMenuActive);
   };
 
   return (

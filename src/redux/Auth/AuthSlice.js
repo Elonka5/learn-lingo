@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
+  changePasswordAsync,
   loginThunk,
   logoutThunk,
   registerThunk,
   updateAvatar,
+  updateDisplayNameAsync,
 } from './AuthThunk';
 import { getFavoritesTeachers } from '../Favorite/FavoriteThunk';
 import { uploadAvatarAsync } from './UserThunk';
@@ -35,6 +37,9 @@ const authSlice = createSlice({
       ...state,
       favorites: payload,
     }),
+    updateUserName: (state, action) => {
+      state.name = action.payload.name;
+    },
     clearUserData: state => {
       return {
         ...initialState,
@@ -66,6 +71,7 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
+        console.log('Login fulfilled payload:', payload);
         state.userId = payload.uid;
         state.name = payload.displayName;
         state.email = payload.email;
@@ -92,6 +98,7 @@ const authSlice = createSlice({
         state.email = null;
         state.isLoggedIn = false;
         state.isLoading = false;
+        state.photoURL = null;
       })
       .addCase(logoutThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -102,6 +109,21 @@ const authSlice = createSlice({
       })
       .addCase(uploadAvatarAsync.fulfilled, (state, { payload }) => {
         state.photoURL = payload;
+      })
+      .addCase(updateDisplayNameAsync.fulfilled, (state, action) => {
+        state.name = action.payload;
+      })
+      .addCase(changePasswordAsync.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(changePasswordAsync.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.successMessage = action.payload;
+      })
+      .addCase(changePasswordAsync.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       })
       .addCase('UPDATE_FAVORITES_AFTER_ADDITION', (state, action) => {
         const { id } = action.payload;
@@ -126,5 +148,9 @@ const authSlice = createSlice({
 
 export const authReducer = authSlice.reducer;
 
-export const { getCurrentUser, setUserFavorites, clearUserData } =
-  authSlice.actions;
+export const {
+  getCurrentUser,
+  setUserFavorites,
+  clearUserData,
+  updateUserName,
+} = authSlice.actions;
