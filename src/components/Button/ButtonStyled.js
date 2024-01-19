@@ -20,7 +20,6 @@ export const StyledButton = styled.button`
     background-color: ${({ theme }) => theme.colors.secondGreen};
   }
 
-
   @media screen and (min-width: 1440px) {
     padding: ${({ theme }) => `${theme.spacing(4)} ${theme.spacing(9.22)}`};
   }
@@ -38,10 +37,17 @@ export const StyledButton = styled.button`
       color: ${({ theme }) => theme.colors.white};
       background-color: ${({ theme }) => theme.colors.primaryBlack};
       font-size: ${({ theme }) => theme.fontSizes.m};
+      width: ${({ theme }) => theme.spacing(28)};
 
       &:hover,
       &:focus {
         background-color: ${({ theme }) => theme.colors.green};
+      }
+
+      @media screen and (min-width: 768px) {
+        padding: ${({ theme }) => `${theme.spacing(5)} ${theme.spacing(3)}`};
+        font-size: ${({ theme }) => theme.fontSizes.ml};
+        width: ${({ theme }) => theme.spacing(39)};
       }
 
       @media screen and (min-width: 1440px) {
@@ -57,11 +63,11 @@ export const StyledButton = styled.button`
       padding: ${({ theme }) => `${theme.spacing(4)} ${theme.spacing(27)}`};
 
       @media screen and (min-width: 768px) {
-        padding: ${({ theme }) => `${theme.spacing(4)} ${theme.spacing(50)}`};
+        padding: ${({ theme }) => `${theme.spacing(4)} ${theme.spacing(42)}`};
       }
 
       @media screen and (min-width: 1440px) {
-        padding: ${({ theme }) => `${theme.spacing(4)} ${theme.spacing(54)}`};
+        padding: ${({ theme }) => `${theme.spacing(4)} ${theme.spacing(50)}`};
       }
     `}
 `;

@@ -46,7 +46,6 @@ const ModalBookTrial = ({ id, name, surname, avatar_url }) => {
       <ModalText
         style={{
           marginBottom: '20px',
-          width: '440px',
         }}
       >
         Our experienced tutor will assess your current language level, discuss

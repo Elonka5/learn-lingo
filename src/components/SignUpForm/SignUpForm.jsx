@@ -15,6 +15,7 @@ import { FiEye } from 'react-icons/fi';
 import { Formik } from 'formik';
 import { validationSignUp } from '../../helpers/schemas';
 import Button from '../Button/Button';
+import { Notify } from 'notiflix';
 
 const initialState = {
   email: '',
@@ -32,9 +33,18 @@ const SignUpForm = () => {
   };
 
   const handlerSubmit = (values, { resetForm }) => {
-    dispatch(loginThunk(values));
-    toggleModal();
-    resetForm();
+    dispatch(loginThunk(values))
+      .unwrap()
+      .then(() => {
+        toggleModal();
+        resetForm();
+        Notify.success("Welcome back! You're now logged in.", {
+          timeout: 1000,
+        });
+      })
+      .catch(error => {
+        Notify.failure(error, { timeout: 2000 });
+      });
   };
 
   return (

@@ -7,7 +7,7 @@ export const FormWrapper = styled(Form)`
   width: ${({ theme }) => theme.spacing(64)};
 
   @media screen and (min-width: 768px) {
-    flex-direction: row;
+    width: ${({ theme }) => theme.spacing(95)};
   }
 
   @media screen and (min-width: 1440px) {
@@ -25,7 +25,7 @@ export const StyledInput = styled(Field)`
     ${({ theme, $error }) =>
       $error ? theme.colors.red : theme.colors.inputBorder};
 
-  width: ${({ theme }) => theme.spacing(64)};
+  width: ${({ theme }) => theme.spacing(62)};
   appearance: none;
   outline: none;
 
@@ -59,6 +59,14 @@ export const ModalText = styled.p`
   line-height: 22px; /* 137.5% */
   margin-top: ${({ theme }) => theme.spacing(5)};
   margin-bottom: ${({ theme }) => theme.spacing(10)};
+
+  @media screen and (min-width: 768px) {
+    width: ${({ theme }) => theme.spacing(95)};
+  }
+
+  @media screen and (min-width: 1440px) {
+    width: ${({ theme }) => theme.spacing(109.5)};
+  }
 `;
 
 export const StyledError = styled(ErrorMessage)`
@@ -69,6 +77,14 @@ export const StyledError = styled(ErrorMessage)`
   display: block;
   font-size: ${({ theme }) => theme.fontSizes.xs};
   line-height: 18px;
+  width: ${({ theme }) => theme.spacing(55)};
+
+  @media screen and (min-width: 768px) {
+    width: 100%;
+  }
+
+  @media screen and (min-width: 1440px) {
+  }
 `;
 
 export const ToggleBtn = styled.button`

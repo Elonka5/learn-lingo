@@ -8,8 +8,15 @@ const Container = ({ children }) => {
   const isHome = location.pathname === '/';
   const isFavorite = location.pathname === '/favorites';
   const isMobile = useMediaQuery({ maxWidth: 767.9 });
+  const isTablet = useMediaQuery({ maxWidth: 1399.9 });
   const containerStyle = {
-    padding: isMobile ? '16px' : isHome ? '0 64px 32px' : '30px 128px 96px',
+    padding: isMobile
+      ? '16px'
+      : isTablet
+      ? '30px 64px 32px'
+      : isHome
+      ? '0 64px 32px'
+      : '30px 128px 96px',
     display: isFavorite ? 'flex' : 'block',
     justifyContent: isFavorite ? 'center' : 'initial',
     alignItems: isFavorite ? 'center' : 'initial',

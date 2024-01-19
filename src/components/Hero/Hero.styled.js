@@ -124,12 +124,13 @@ export const FavoriteDiv = styled.div`
   }
 
   @media screen and (min-width: 768px) {
+    img {
+      width: ${({ theme }) => theme.spacing(80)};
+    }
   }
   @media screen and (min-width: 1440px) {
     img {
-      width: 400px;
-      margin-left: auto;
-      margin-right: auto;
+      width: ${({ theme }) => theme.spacing(100)};
     }
   }
 `;

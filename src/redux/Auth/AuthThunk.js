@@ -5,11 +5,14 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
-import { auth, db } from '../../firebase/firebase';
-import { get, getDatabase, ref, remove, set } from 'firebase/database';
+import { auth, db, storage } from '../../firebase/firebase';
+import { get, getDatabase, ref, remove, set, update } from 'firebase/database';
+import { uploadBytes, getDownloadURL } from 'firebase/storage';
+// import { ref as sRef } from 'firebase/storage';
 
 import { runTransaction } from 'firebase/database';
 import { getFavoritesTeachers } from '../Favorite/FavoriteThunk';
+// import { getDownloadURL, uploadBytes } from 'firebase/storage';
 
 export const registerThunk = createAsyncThunk(
   'auth/registerAndSaveUserData',
@@ -21,21 +24,25 @@ export const registerThunk = createAsyncThunk(
         password
       );
 
+      const defaultAvatar = `https://ui-avatars.com/api/?name=${displayName}&background=9FBAAE`;
+
       const uid = userCredential.user.uid;
 
       await updateProfile(auth.currentUser, {
         displayName: displayName,
+        photoURL: defaultAvatar,
       });
 
       const db = getDatabase();
       const userData = {
         email: email,
         displayName: displayName,
+        photoURL: defaultAvatar,
       };
 
       await set(ref(db, `users/${uid}`), userData);
 
-      return { uid, email, displayName };
+      return { uid, email, displayName, photoURL: defaultAvatar };
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -51,8 +58,8 @@ export const loginThunk = createAsyncThunk(
         body.email,
         body.password
       );
-      const { uid, displayName, email } = userCredential.user;
-      return { uid, displayName, email };
+      const { uid, displayName, email, photoURL } = userCredential.user;
+      return { uid, displayName, email, photoURL };
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -73,7 +80,6 @@ export const logoutThunk = createAsyncThunk(
 export const addFavoriteTeacherThunk = createAsyncThunk(
   'favorite/addFavoriteTeacher',
   async ({ userId, teacher }) => {
-    console.log('Adding favorite teacher:', { userId, teacher });
     const db = getDatabase();
     const userRef = ref(db, `users/${userId}/favorites/` + teacher.id);
     try {
@@ -139,6 +145,56 @@ export const loadUserFavoritesThunk = createAsyncThunk(
     } catch (error) {
       console.error('Error loading user favorites:', error);
       throw error;
+    }
+  }
+);
+
+export const updateDisplayName = createAsyncThunk(
+  'user/updateDisplayName',
+  async (newDisplayName, { getState, getFirebase }) => {
+    const firebase = getFirebase();
+    const user = firebase.auth().currentUser;
+
+    await user.updateProfile({
+      displayName: newDisplayName,
+    });
+
+    return newDisplayName;
+  }
+);
+
+
+export const updatePassword = createAsyncThunk(
+  'user/updatePassword',
+  async (newPassword, { getState, getFirebase }) => {
+    const firebase = getFirebase();
+    const user = firebase.auth().currentUser;
+
+    await user.updatePassword(newPassword);
+
+    return null; 
+  }
+);
+
+
+
+export const updateAvatar = createAsyncThunk(
+  'auth/updateAvatar',
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { userId, file } = payload;
+      const storageRef = ref(storage, `avatars/${userId}`);
+
+      await uploadBytes(storageRef, file);
+
+      const downloadURL = await getDownloadURL(storageRef);
+
+      const dbRef = ref(db, `users/${userId}`);
+      await update(dbRef, { photoURL: downloadURL });
+
+      return downloadURL;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
   }
 );

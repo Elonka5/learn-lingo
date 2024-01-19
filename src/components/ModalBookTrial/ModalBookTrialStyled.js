@@ -36,15 +36,15 @@ export const AvatarWrapper = styled.div`
 
 export const StyledForm = styled(Form)`
   width: 100%;
-  max-width: 438px;
+  max-width: ${({ theme }) => theme.spacing(118)};
 `;
 
 export const StyledInputWrap = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: ${({ theme }) => theme.spacing(5)};
 
-  padding-bottom: 40px;
+  padding-bottom: ${({ theme }) => theme.spacing(10)};
 `;
 
 export const StyledPasswordDiv = styled.div`
@@ -59,6 +59,10 @@ export const ReasonText = styled.p`
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   line-height: ${({ theme }) => theme.lineHeights.medium};
   margin-bottom: ${({ theme }) => theme.spacing(5)};
+
+  @media screen and (min-width: 768px) {
+    width: ${({ theme }) => theme.spacing(95)};
+  }
 `;
 
 export const WrapperRadioBtn = styled.div`
@@ -112,5 +116,12 @@ export const StyledLabel = styled.label`
 export const StyledWrapperForm = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${({ theme }) => theme.spacing(109.5)};
+  width: ${({ theme }) => theme.spacing(62)};
+
+  @media screen and (min-width: 768px) {
+    width: ${({ theme }) => theme.spacing(95)};
+  }
+
+  @media screen and (min-width: 1440px) {
+  }
 `;

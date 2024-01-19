@@ -9,6 +9,7 @@ import {
   AuthWrapper,
   BtnLogIn,
   BtnWrapper,
+  FavSvg,
   HomeSvg,
   LogInSvg,
   LogOutSvg,
@@ -18,23 +19,21 @@ import {
   UserName,
   UserSvg,
 } from './NavigationStyled';
-import { IoMdHeart } from 'react-icons/io';
 import { clearUserData } from '../../redux/Auth/AuthSlice';
 import { useEffect } from 'react';
+import AvatarUploader from '../ModalSettings/AvatarUploader';
 
 const Navigation = ({ closeBurgerMenu }) => {
   const isAuth = useSelector(selectIsLoggedIn);
   const userName = useSelector(selectUserName);
-  console.log(userName);
-  const isEmail = useSelector(state => state.auth.email);
-  console.log(isEmail);
+  const userAvatar = useSelector(state => state.auth.photoURL);
+  console.log(userAvatar);
+
   const dispatch = useDispatch();
   const toggleModal = useModal();
 
   useEffect(() => {
     if (!isAuth) {
-      // Якщо користувач розлогінений, очистіть ім'я користувача
-      // Можливо, також варто викликати clearUserData() тут
       dispatch(clearUserData());
     }
   }, [isAuth, dispatch]);
@@ -48,22 +47,16 @@ const Navigation = ({ closeBurgerMenu }) => {
       <SiteNav>
         <li>
           <HomeSvg />
-          <StyledNavLink to="/" onClick={closeBurgerMenu}>
-            Home
-          </StyledNavLink>
+          <StyledNavLink to="/">Home</StyledNavLink>
         </li>
         <li>
           <TeacherSvg />
-          <StyledNavLink to="teachers" onClick={closeBurgerMenu}>
-            Teachers
-          </StyledNavLink>
+          <StyledNavLink to="teachers">Teachers</StyledNavLink>
         </li>
         {isAuth && (
           <li>
-            <IoMdHeart fill="#fff" />
-            <StyledNavLink to="favorites" onClick={closeBurgerMenu}>
-              Favorites
-            </StyledNavLink>
+            <FavSvg />
+            <StyledNavLink to="favorites">Favorites</StyledNavLink>
           </li>
         )}
       </SiteNav>
@@ -74,6 +67,16 @@ const Navigation = ({ closeBurgerMenu }) => {
             <UserSvg />
             {`${userName}`}
           </UserName>
+          <img src={userAvatar} alt="user_avatar" />
+          <button
+            onClick={() => {
+              toggleModal(
+                <AvatarUploader size="medium" title="Your Settings" />
+              );
+            }}
+          >
+            Settings
+          </button>
           <BtnLogIn style={{ gap: '18px' }} onClick={handleLogout}>
             <LogOutSvg />
             Logout
@@ -88,7 +91,7 @@ const Navigation = ({ closeBurgerMenu }) => {
             }}
           >
             <LogInSvg />
-            Login
+            Log In
           </BtnLogIn>
           <Button
             text="Registration"

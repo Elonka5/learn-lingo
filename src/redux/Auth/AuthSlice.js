@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginThunk, logoutThunk, registerThunk } from './AuthThunk';
+import {
+  loginThunk,
+  logoutThunk,
+  registerThunk,
+  updateAvatar,
+} from './AuthThunk';
 import { getFavoritesTeachers } from '../Favorite/FavoriteThunk';
+import { uploadAvatarAsync } from './UserThunk';
 
 const initialState = {
   userId: null,
@@ -10,6 +16,7 @@ const initialState = {
   error: null,
   isLoggedIn: false,
   favorites: {},
+  photoURL: null,
 };
 
 const authSlice = createSlice({
@@ -22,6 +29,7 @@ const authSlice = createSlice({
       email: payload.email,
       name: payload.name,
       isLoggedIn: true,
+      photoURL: payload.photoURL,
     }),
     setUserFavorites: (state, { payload }) => ({
       ...state,
@@ -29,7 +37,7 @@ const authSlice = createSlice({
     }),
     clearUserData: state => {
       return {
-        ...initialState, // Скидуємо до початкового стану
+        ...initialState,
         favorites: {},
       };
     },
@@ -41,9 +49,11 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(registerThunk.fulfilled, (state, { payload }) => {
+        console.log('Register fulfilled payload:', payload);
         state.userId = payload.uid;
         state.name = payload.displayName;
         state.email = payload.email;
+        state.photoURL = payload.photoURL;
         state.isLoggedIn = true;
         state.isLoading = false;
       })
@@ -59,12 +69,16 @@ const authSlice = createSlice({
         state.userId = payload.uid;
         state.name = payload.displayName;
         state.email = payload.email;
+        state.photoURL = payload.photoURL;
         state.isLoggedIn = true;
         state.isLoading = false;
       })
       .addCase(loginThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
+      })
+      .addCase(updateAvatar.fulfilled, (state, { payload }) => {
+        state.photoURL = payload;
       })
       .addCase(getFavoritesTeachers.fulfilled, (state, { payload }) => {
         state.favorites = payload;
@@ -82,6 +96,12 @@ const authSlice = createSlice({
       .addCase(logoutThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
+      })
+      .addCase(uploadAvatarAsync.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(uploadAvatarAsync.fulfilled, (state, { payload }) => {
+        state.photoURL = payload;
       })
       .addCase('UPDATE_FAVORITES_AFTER_ADDITION', (state, action) => {
         const { id } = action.payload;

@@ -1,32 +1,62 @@
 import React, { useState } from 'react';
-import { BurgerBtn, BurgerSvg } from './BurgerMenuStyled';
+import { WrapperDiv } from './BurgerMenuStyled';
 import BurgerModalSide from './BurgerModal';
+import Hamburger from './BurgerButton';
+import { useModal } from '../ModalContext/ModalContextProvider';
 
 const BurgerMenu = () => {
-  const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleModal = useModal();
+  console.log(toggleModal);
 
   const toggleMenu = () => {
-    setMenuOpen(!isMenuOpen);
+    setSidebarOpen(prev => !prev);
+
+    // setModalOpen(false);
   };
 
   const closeBurgerMenu = () => {
-    setMenuOpen(false);
+    setSidebarOpen(false);
+
+    // setModalOpen(false);
   };
 
   return (
-    <>
-      <BurgerBtn onClick={toggleMenu}>
-        <BurgerSvg />
-      </BurgerBtn>
-      {isMenuOpen && (
+    <WrapperDiv>
+      <Hamburger onClick={toggleMenu} isModalOpen={isSidebarOpen} />
+      {isSidebarOpen && (
         <BurgerModalSide
-          isMenuOpen={isMenuOpen}
+          show={isSidebarOpen}
           closeBurgerMenu={closeBurgerMenu}
-        >
-        </BurgerModalSide>
+        ></BurgerModalSide>
       )}
-    </>
+    </WrapperDiv>
   );
 };
 
 export default BurgerMenu;
+
+// {
+//   /* <BurgerModalSide show={status} /> */
+// }
+
+// <BurgerBtn onClick={() => setStatus(status => !status)}>
+//   <BurgerSvg />
+// </BurgerBtn>;
+
+//Was in return
+// <>
+//   <BurgerBtn onClick={toggleMenu}>
+//     <BurgerSvg />
+//   </BurgerBtn>
+// {
+//   /* {isMenuOpen && (
+//     <BurgerModalSide
+//       isMenuOpen={isMenuOpen}
+//       closeBurgerMenu={closeBurgerMenu}
+//     >
+//     </BurgerModalSide>
+//   )} */
+// }
+// </>

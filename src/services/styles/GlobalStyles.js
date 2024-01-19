@@ -15,6 +15,12 @@ body {
   
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+
+}
+
+.body-no-scroll {
+  overflow: hidden;
 }
 
 code {
@@ -49,5 +55,6 @@ p {
 
 img {
   display: block;
+  width: 100%;
 }
 `;

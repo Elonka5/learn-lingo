@@ -66,7 +66,6 @@ export const LangWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: ${({ theme }) => theme.spacing(3)};
-  /* margin-bottom: ${({ theme }) => theme.spacing(2)}; */
 
   h3 {
     color: ${({ theme }) => theme.colors.secondaryFont};
@@ -88,7 +87,6 @@ export const LangWrapper = styled.div`
   }
 
   @media screen and (min-width: 768px) {
-    /* flex-direction: row; */
     justify-content: space-between;
 
     ul {
@@ -96,12 +94,14 @@ export const LangWrapper = styled.div`
       flex-direction: row;
       flex-wrap: wrap;
       align-items: center;
-      /* justify-content: center; */
       gap: ${({ theme }) => `${theme.spacing(3.5)} ${theme.spacing(7)}`};
     }
   }
 
   @media screen and (min-width: 1440px) {
+    flex-direction: row;
+    justify-content: start;
+    gap: ${({ theme }) => theme.spacing(48)};
   }
 `;
 
@@ -166,7 +166,7 @@ export const LessonWrapper = styled.div`
     gap: ${({ theme }) => theme.spacing(2)};
   }
 
-  li {
+  li:first-child {
     display: flex;
     flex-direction: column;
     gap: ${({ theme }) => theme.spacing(1)};
@@ -267,6 +267,7 @@ export const ReviewList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing(8)};
+  margin-bottom: ${({ theme }) => theme.spacing(4)};
 
   @media screen and (min-width: 768px) {
   }
@@ -293,7 +294,8 @@ export const NameLangWrapper = styled.div`
   }
 
   @media screen and (min-width: 1440px) {
-    gap: ${({ theme }) => theme.spacing(8)};
+    gap: ${({ theme }) => theme.spacing(2)};
+    flex-direction: column;
   }
 `;
 

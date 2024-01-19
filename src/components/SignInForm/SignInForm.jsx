@@ -15,6 +15,7 @@ import {
 import { validationSignIn } from '../../helpers/schemas';
 import { useState } from 'react';
 import Button from '../Button/Button';
+import { Notify } from 'notiflix';
 
 const initialState = {
   displayName: '',
@@ -34,9 +35,18 @@ const SignInForm = () => {
   };
 
   const handlerSubmit = (values, { resetForm }) => {
-    dispatch(registerThunk({ ...values, favorites: {} }));
-    toggleModal();
-    resetForm();
+    dispatch(registerThunk({ ...values, favorites: {} }))
+      .unwrap()
+      .then(() => {
+        toggleModal();
+        resetForm();
+        Notify.success('Welcome!', {
+          timeout: 1000,
+        });
+      })
+      .catch(error => {
+        Notify.failure(error, { timeout: 2000 });
+      });
   };
 
   return (

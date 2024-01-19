@@ -33,6 +33,8 @@ import ModalBookTrial from '../ModalBookTrial/ModalBookTrial';
 import { useModal } from '../ModalContext/ModalContextProvider';
 import Button from '../Button/Button';
 import { toggleFavoriteTeacherThunk } from '../../helpers/handle';
+import { selectIsLoggedIn } from '../../redux/selectors';
+import Notiflix from 'notiflix';
 
 const TeacherCard = ({ teacher }) => {
   const {
@@ -53,15 +55,11 @@ const TeacherCard = ({ teacher }) => {
 
   const [showMore, setShowMore] = useState(false);
 
-  // const isFavorite = useSelector(selectFavoriteTeacher);
   const userId = useSelector(state => state.auth.userId);
- 
+  const isLogin = useSelector(selectIsLoggedIn);
 
-  // const isAuth = useSelector(selectIsLoggedIn);
   const toggleModal = useModal();
   const favorites = useSelector(state => state.auth.favorites);
-
-  // const isFavoriteTeach = favorites && favorites[teacher.id];
 
   const isFavoriteTeach = favorites && favorites[teacher.id] !== undefined;
 
@@ -71,8 +69,13 @@ const TeacherCard = ({ teacher }) => {
     setShowMore(!showMore);
   };
 
-
   const handleDelete = () => {
+    if (!isLogin) {
+      Notiflix.Notify.warning(
+        'Access to this action is restricted to authorized users only. Please log in to your account.'
+      );
+      return;
+    }
     dispatch(toggleFavoriteTeacherThunk({ userId, teacher }));
   };
 
@@ -189,7 +192,9 @@ const TeacherCard = ({ teacher }) => {
               onClick={() =>
                 toggleModal(
                   <ModalBookTrial
-                    size="big"
+                    style={{ overflowY: 'scroll' }}
+                    variant="modalbook"
+                    size="medium"
                     title="Book trial lesson"
                     name={name}
                     surname={surname}

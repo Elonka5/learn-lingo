@@ -5,10 +5,27 @@ import { NavLink } from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
 import { GiTeacher } from 'react-icons/gi';
 import { FaUserGraduate } from 'react-icons/fa';
+import { IoMdHeart } from 'react-icons/io';
+
+export const FavSvg = styled(IoMdHeart)`
+  fill: ${({ theme }) => theme.colors.white};
+
+  @media screen and (min-width: 768px) {
+    width: ${({ theme }) => theme.spacing(6)};
+    height: ${({ theme }) => theme.spacing(6)};
+  }
+
+  @media screen and (min-width: 1440px) {
+    display: none;
+  }
+`;
 
 export const HomeSvg = styled(FaHome)`
   fill: ${({ theme }) => theme.colors.white};
+
   @media screen and (min-width: 768px) {
+    width: ${({ theme }) => theme.spacing(6)};
+    height: ${({ theme }) => theme.spacing(6)};
   }
 
   @media screen and (min-width: 1440px) {
@@ -29,10 +46,24 @@ export const UserName = styled.p`
 
 export const UserSvg = styled(FaUserGraduate)`
   fill: ${({ theme }) => theme.colors.white};
+
+  @media screen and (min-width: 768px) {
+    width: ${({ theme }) => theme.spacing(6)};
+    height: ${({ theme }) => theme.spacing(6)};
+  }
 `;
 
 export const TeacherSvg = styled(GiTeacher)`
   fill: ${({ theme }) => theme.colors.white};
+
+  @media screen and (min-width: 768px) {
+    width: ${({ theme }) => theme.spacing(6)};
+    height: ${({ theme }) => theme.spacing(6)};
+  }
+
+  @media screen and (min-width: 1440px) {
+    display: none;
+  }
 `;
 
 export const AuthWrapper = styled.div`
@@ -45,6 +76,12 @@ export const AuthWrapper = styled.div`
     font-size: ${({ theme }) => theme.fontSizes.m};
     font-weight: ${({ theme }) => theme.fontWeights.bold};
     line-height: ${({ theme }) => theme.lineHeights.normal};
+  }
+
+  img {
+    width: 54px;
+    height: 54px;
+    border-radius: ${({ theme }) => theme.radii.round};
   }
 
   @media screen and (min-width: 768px) {
@@ -65,7 +102,7 @@ export const BtnLogIn = styled.button`
   display: flex;
   align-items: center;
   color: ${({ theme }) => theme.colors.white};
-  gap: ${({ theme }) => theme.spacing(7)};
+  gap: ${({ theme }) => theme.spacing(6)};
   border: ${({ theme }) => theme.borders.none};
   background-color: transparent;
   font-size: ${({ theme }) => theme.fontSizes.m};
@@ -74,15 +111,20 @@ export const BtnLogIn = styled.button`
   cursor: pointer;
   transition: color 0.3s ease;
 
-  &:hover,
-  &:focus {
-    color: ${({ theme }) => theme.colors.green};
-  }
   @media screen and (min-width: 768px) {
+    gap: ${({ theme }) => theme.spacing(11)};
+    font-size: ${({ theme }) => theme.fontSizes.ml};
   }
 
   @media screen and (min-width: 1440px) {
+    font-size: ${({ theme }) => theme.fontSizes.m};
+    color: ${({ theme }) => theme.colors.primaryBlack};
     gap: ${({ theme }) => theme.spacing(2)};
+
+    &:hover,
+    &:focus {
+      color: ${({ theme }) => theme.colors.green};
+    }
   }
 `;
 
@@ -95,10 +137,14 @@ export const SiteNav = styled.ul`
   li {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: ${({ theme }) => theme.spacing(2)};
   }
 
   @media screen and (min-width: 768px) {
+    margin-bottom: ${({ theme }) => theme.spacing(8.5)};
+    li {
+      gap: ${({ theme }) => theme.spacing(4)};
+    }
   }
 
   @media screen and (min-width: 1440px) {
@@ -111,15 +157,17 @@ export const BtnWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: ${({ theme }) => theme.spacing(4)};
-  padding: 0 20px;
+  gap: ${({ theme }) => theme.spacing(5.5)};
+  padding: ${({ theme }) => `${theme.spacing(0)} ${theme.spacing(3.5)}`};
 
   @media screen and (min-width: 768px) {
+    padding: ${({ theme }) => `${theme.spacing(0)} ${theme.spacing(16)}`};
   }
 
   @media screen and (min-width: 1440px) {
     flex-direction: row;
     align-items: center;
+    gap: ${({ theme }) => theme.spacing(4)};
     padding: 0;
   }
 `;
@@ -130,6 +178,8 @@ export const LogInSvg = styled(FiLogIn)`
   height: ${({ theme }) => theme.spacing(5)};
 
   @media screen and (min-width: 768px) {
+    width: ${({ theme }) => theme.spacing(6)};
+    height: ${({ theme }) => theme.spacing(6)};
   }
 
   @media screen and (min-width: 1440px) {
@@ -169,12 +219,18 @@ export const StyledNavLink = styled(NavLink)`
   }
 
   @media screen and (min-width: 768px) {
+    width: ${({ theme }) => theme.spacing(30)};
+    height: ${({ theme }) => theme.spacing(10)};
+    font-size: ${({ theme }) => theme.fontSizes.ml};
+    line-height: 20px;
   }
 
   @media screen and (min-width: 1440px) {
     color: ${({ theme }) => theme.colors.primaryBlack};
-    border-radius: ${({ theme }) => theme.radii.button};
+    font-size: ${({ theme }) => theme.fontSizes.m};
     transition: background-color 300ms ease-in-out;
+    height: ${({ theme }) => theme.spacing(8.5)};
+    width: ${({ theme }) => theme.spacing(20)};
 
     &.active {
       color: ${({ theme }) => theme.colors.green};

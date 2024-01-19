@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { modalSizes } from '../../constants/modalSizes';
 
 const getSize = (size, screen) => modalSizes[screen][size];
@@ -9,9 +9,6 @@ export const DivModalBox = styled.div`
   width: 280px;
   padding: ${({ $size }) => ($size === 'small' ? '32px 24px' : '32px 12px')};
   border-radius: ${({ theme }) => theme.radii.medium};
-  transform: translateX(-0%) translateY(8%);
-  height: 100%;
-  overflow-y: scroll;
   overflow-x: hidden;
 
   @media screen and (min-width: 768px) {
@@ -23,10 +20,21 @@ export const DivModalBox = styled.div`
   }
   @media screen and (min-width: 1440px) {
     width: ${({ $size }) => getSize($size, 'xl')}px;
-    overflow-y: scroll;
-    height: 100%;
-    transform: translateX(-0%) translateY(20%);
+    /* overflow-y: scroll;
+    height: 100%; */
+    transform: translateX(-0%) translateY(0%);
   }
+
+  ${({ $variant }) =>
+    $variant === 'modalbook' &&
+    css`
+      height: 100%;
+      overflow-y: scroll;
+
+      @media screen and (min-width: 1440px) {
+        height: 90%;
+      }
+    `}
 
   &::-webkit-scrollbar {
     width: ${({ theme }) => theme.spacing(2)};

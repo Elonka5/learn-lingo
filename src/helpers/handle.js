@@ -14,7 +14,6 @@ export const updateFavoritesAfterRemoval = teacherId => ({
 export const toggleFavoriteTeacherThunk = createAsyncThunk(
   'favorite/toggleFavoriteTeacher',
   async ({ userId, teacher }, { dispatch }) => {
-    console.log('Toggling favorite teacher:', { userId, teacher });
     const db = getDatabase();
     const userRef = ref(db, `users/${userId}/favorites/` + teacher.id);
 
@@ -36,32 +35,3 @@ export const toggleFavoriteTeacherThunk = createAsyncThunk(
     }
   }
 );
-
-// const addTeacherToFavorites = async (userRef, teacher) => {
-//   try {
-//     const snapshot = await get(userRef);
-//     const currentData = snapshot.val();
-
-//     let updatedData;
-
-//     if (currentData === null) {
-//       updatedData = [{ ...teacher, isFavorite: true }];
-//     } else {
-//       updatedData = Array.isArray(currentData) ? currentData : [currentData];
-//       updatedData.push({ ...teacher, isFavorite: true });
-//     }
-
-//     await set(userRef, updatedData);
-//   } catch (error) {
-//     console.error('Error adding favorite teacher:', error);
-//     throw error;
-//   }
-// };
-
-// const removeTeacherFromFavorites = async (userRef, teacherId) => {
-//   remove(ref(userRef, teacherId));
-// };
-
-// const isTeacherInFavorites = (favorites, teacherId) => {
-//   return Object.keys(favorites).includes(teacherId);
-// };
