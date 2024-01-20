@@ -3,16 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFavoritesTeachers } from '../../redux/Favorite/FavoriteThunk';
 import TeacherCard from '../TeacherCard/TeacherCard';
 import { FavoriteDiv, StyledNav, Title } from '../Hero/Hero.styled';
-import favImg from '../../assets/images/favorite_img.png';
-import { selectTeachersLoading } from '../../redux/selectors';
-import Loader from '../Loader/Loader';
+import {
+  selectAuthId,
+  selectTeachersLoading,
+  selectUserFavorite,
+} from '../../redux/selectors';
 import { TeachersList } from '../TeacherCatalog/TeacherCatalogStyled';
+import favImg from '../../assets/images/favorite_img.png';
+import Loader from '../Loader/Loader';
 
 const FavoriteTeachersList = () => {
-  const dispatch = useDispatch();
-  const userId = useSelector(state => state.auth.userId);
-  const favorites = useSelector(state => state.auth.favorites);
+  const userId = useSelector(selectAuthId);
+  const favorites = useSelector(selectUserFavorite);
   const isLoading = useSelector(selectTeachersLoading);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getFavoritesTeachers(userId));

@@ -4,16 +4,11 @@ import { Link } from 'react-router-dom';
 export const HeroWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  /* justify-content: center;
-  align-items: center; */
   gap: ${({ theme }) => theme.spacing(6)};
   margin-bottom: ${({ theme }) => theme.spacing(6)};
 
   img {
     width: 100%;
-  }
-
-  @media screen and (min-width: 768px) {
   }
 
   @media screen and (min-width: 1440px) {
@@ -22,6 +17,8 @@ export const HeroWrapper = styled.div`
 `;
 
 export const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: ${({ theme }) => `${theme.spacing(8)} ${theme.spacing(9)}`};
   background-color: ${({ theme }) => theme.colors.secondBackground};
   border-radius: ${({ theme }) => theme.radii.medium};
@@ -59,7 +56,6 @@ export const Title = styled.h1`
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   line-height: 56px; /* 116.667% */
   letter-spacing: -0.96px;
-  /* width: ${({ theme }) => theme.spacing(137)}; */
   margin-bottom: ${({ theme }) => theme.spacing(8)};
 
   span {
@@ -102,8 +98,6 @@ export const StyledNav = styled(Link)`
   &:hover,
   &:focus {
     background-color: ${({ theme }) => theme.colors.secondGreen};
-  }
-  @media screen and (min-width: 768px) {
   }
 
   @media screen and (min-width: 1440px) {

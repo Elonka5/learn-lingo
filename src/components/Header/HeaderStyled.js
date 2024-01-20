@@ -3,7 +3,6 @@ import { ReactComponent as LogoIcon } from '../../assets/images/ukraine.svg';
 import { Link } from 'react-router-dom';
 
 export const HeaderWrapper = styled.div`
-  width: ${({ theme }) => theme.spacing(80)};
   margin-left: auto;
   margin-right: auto;
   padding: ${({ theme }) => `${theme.spacing(5)} ${theme.spacing(4)}`};

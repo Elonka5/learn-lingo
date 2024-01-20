@@ -27,9 +27,6 @@ export const DescrWrapper = styled.ul`
     height: ${({ theme }) => theme.spacing(29)};
     padding: ${({ theme }) => `${theme.spacing(10)} ${theme.spacing(30)}`};
     gap: ${({ theme }) => theme.spacing(25)};
-
-    li {
-    }
   }
 `;
 
@@ -38,12 +35,6 @@ export const TitleDescription = styled.p`
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   line-height: 32px; /* 114.286% */
   letter-spacing: -0.56px;
-
-  @media screen and (min-width: 768px) {
-  }
-
-  @media screen and (min-width: 1440px) {
-  }
 `;
 
 export const TextDescription = styled.p`
@@ -51,5 +42,5 @@ export const TextDescription = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.s};
   line-height: 18px; /* 128.571% */
   letter-spacing: -0.28px;
-  width: 74px;
+  width: ${({ theme }) => theme.spacing(18.5)};
 `;

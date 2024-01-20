@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSpring } from 'react-spring';
 import Navigation from '../Navigation/Navigation';
-import { WrapperBurgerModal } from './BurgerMenuStyled';
+import { WrapperBurgerModal } from './SideBar/SideBarStyled';
 
-const BurgerModalSide = ({ show, closeBurgerMenu }) => {
+const SideBarSide = ({ show, closeBurgerMenu }) => {
   const { left } = useSpring({
     from: { left: '-100%' },
     left: show ? '0' : '-100%',
@@ -15,4 +15,4 @@ const BurgerModalSide = ({ show, closeBurgerMenu }) => {
   );
 };
 
-export default BurgerModalSide;
+export default SideBarSide;

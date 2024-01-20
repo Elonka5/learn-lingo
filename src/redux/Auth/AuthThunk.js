@@ -10,12 +10,13 @@ import {
 } from 'firebase/auth';
 import { auth, db, storage } from '../../firebase/firebase';
 import { get, getDatabase, ref, remove, set, update } from 'firebase/database';
-import { uploadBytes, getDownloadURL } from 'firebase/storage';
-// import { ref as sRef } from 'firebase/storage';
-
+import {
+  ref as storageRef,
+  uploadBytes,
+  getDownloadURL,
+} from 'firebase/storage';
 import { runTransaction } from 'firebase/database';
 import { getFavoritesTeachers } from '../Favorite/FavoriteThunk';
-// import { getDownloadURL, uploadBytes } from 'firebase/storage';
 
 export const registerThunk = createAsyncThunk(
   'auth/registerAndSaveUserData',
@@ -54,7 +55,7 @@ export const registerThunk = createAsyncThunk(
 
 export const loginThunk = createAsyncThunk(
   'auth/loginThunk',
-  async (body, { rejectWithValue }) => {
+  async (body, { rejectWithValue, dispatch }) => {
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -152,13 +153,16 @@ export const loadUserFavoritesThunk = createAsyncThunk(
   }
 );
 
-export const updateDisplayNameAsync = createAsyncThunk(
+export const updateDisplayNameThunk = createAsyncThunk(
   'user/updateDisplayName',
-  async ({ userId, displayName }) => {
+  async ({ userId, newDisplayName }) => {
     try {
       const userRef = ref(db, `users/${userId}`);
-      await update(userRef, { displayName });
-      return displayName;
+      await updateProfile(auth.currentUser, {
+        displayName: newDisplayName,
+      });
+      await update(userRef, { displayName: newDisplayName });
+      return newDisplayName;
     } catch (error) {
       console.error('Помилка при оновленні імені користувача:', error);
       throw error;
@@ -181,30 +185,67 @@ export const changePasswordAsync = createAsyncThunk(
 
       await updatePassword(user, newPassword);
 
-      return 'Passord succesfully changed.';
+      return 'Password succesfully changed.';
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
 
-export const updateAvatar = createAsyncThunk(
-  'auth/updateAvatar',
-  async (payload, { rejectWithValue }) => {
+export const uploadAvatarThunk = createAsyncThunk(
+  'user/uploadAvatar',
+  async ({ file, userId }) => {
     try {
-      const { userId, file } = payload;
-      const storageRef = ref(storage, `avatars/${userId}`);
+      const storageReference = storageRef(storage, `avatars/${userId}`);
+      const snapshot = await uploadBytes(storageReference, file);
+      const downloadURL = await getDownloadURL(snapshot.ref);
 
-      await uploadBytes(storageRef, file);
-
-      const downloadURL = await getDownloadURL(storageRef);
-
-      const dbRef = ref(db, `users/${userId}`);
-      await update(dbRef, { photoURL: downloadURL });
-
+      await updateProfile(auth.currentUser, {
+        photoURL: downloadURL,
+      });
       return downloadURL;
     } catch (error) {
-      return rejectWithValue(error.message);
+      console.error('Error loading avatar:', error);
+      throw error;
     }
   }
 );
+
+// export const updateUserProfileAsync = createAsyncThunk(
+//   'user/updateUserProfile',
+//   async (
+//     { userId, newDisplayName, oldPassword, newPassword },
+//     { rejectWithValue }
+//   ) => {
+//     try {
+
+//       if (newDisplayName) {
+//         const userRef = ref(db, `users/${userId}`);
+//         await updateProfile(auth.currentUser, {
+//           displayName: newDisplayName,
+//         });
+//         await update(userRef, { displayName: newDisplayName });
+//       }
+
+//       if (oldPassword && newPassword) {
+//         const user = auth.currentUser;
+
+//         if (!user) {
+//           throw new Error('Not authorized.');
+//         }
+
+//         const credentials = EmailAuthProvider.credential(
+//           user.email,
+//           oldPassword
+//         );
+//         await reauthenticateWithCredential(user, credentials);
+//         await updatePassword(user, newPassword);
+//       }
+
+//       // Return a success message or any other relevant data
+//       return 'Profile updated successfully.';
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );

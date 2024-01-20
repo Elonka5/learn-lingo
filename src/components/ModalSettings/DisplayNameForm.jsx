@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateDisplayNameAsync } from '../../redux/Auth/AuthThunk';
+import { updateDisplayNameThunk } from '../../redux/Auth/AuthThunk';
 import { useEffect } from 'react';
 import { updateUserName } from '../../redux/Auth/AuthSlice';
+import { selectAuthId, selectUserName } from '../../redux/selectors';
 
 const DisplayNameForm = () => {
   const dispatch = useDispatch();
-  const userId = useSelector(state => state.auth.userId);
-  const userName = useSelector(state => state.auth.name);
+  const userId = useSelector(selectAuthId);
+  const userName = useSelector(selectUserName);
 
   const [displayName, setDisplayName] = useState('');
 
@@ -16,7 +17,7 @@ const DisplayNameForm = () => {
   };
 
   const handleUpdateDisplayName = newDisplayName => {
-    dispatch(updateDisplayNameAsync({ userId, displayName: newDisplayName }))
+    dispatch(updateDisplayNameThunk({ userId, newDisplayName }))
       .then(updatedUser => {
         const updatedDisplayName = updatedUser.displayName;
         dispatch(updateUserName(updatedDisplayName));

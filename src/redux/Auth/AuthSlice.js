@@ -4,11 +4,10 @@ import {
   loginThunk,
   logoutThunk,
   registerThunk,
-  updateAvatar,
-  updateDisplayNameAsync,
+  updateDisplayNameThunk,
+  uploadAvatarThunk,
 } from './AuthThunk';
 import { getFavoritesTeachers } from '../Favorite/FavoriteThunk';
-import { uploadAvatarAsync } from './UserThunk';
 
 const initialState = {
   userId: null,
@@ -25,21 +24,19 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    getCurrentUser: (state, { payload }) => ({
-      ...state,
-      userId: payload.userId,
-      email: payload.email,
-      name: payload.name,
-      isLoggedIn: true,
-      photoURL: payload.photoURL,
-    }),
+    getCurrentUser: (state, { payload }) => {
+      state.userId = payload.userId;
+      state.name = payload.name;
+      state.email = payload.email;
+      state.photoURL = payload.photoURL;
+      state.isLoggedIn = true;
+      state.isLoading = false;
+      state.error = null;
+    },
     setUserFavorites: (state, { payload }) => ({
       ...state,
       favorites: payload,
     }),
-    updateUserName: (state, action) => {
-      state.name = action.payload.name;
-    },
     clearUserData: state => {
       return {
         ...initialState,
@@ -51,7 +48,6 @@ const authSlice = createSlice({
     builder
       .addCase(registerThunk.pending, state => {
         state.isLoading = true;
-        state.error = null;
       })
       .addCase(registerThunk.fulfilled, (state, { payload }) => {
         console.log('Register fulfilled payload:', payload);
@@ -68,10 +64,8 @@ const authSlice = createSlice({
       })
       .addCase(loginThunk.pending, state => {
         state.isLoading = true;
-        state.error = null;
       })
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
-        console.log('Login fulfilled payload:', payload);
         state.userId = payload.uid;
         state.name = payload.displayName;
         state.email = payload.email;
@@ -83,11 +77,16 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = payload;
       })
-      .addCase(updateAvatar.fulfilled, (state, { payload }) => {
-        state.photoURL = payload;
+      .addCase(getFavoritesTeachers.pending, (state, { payload }) => {
+        state.isLoading = true;
       })
       .addCase(getFavoritesTeachers.fulfilled, (state, { payload }) => {
         state.favorites = payload;
+        state.isLoading = false;
+      })
+      .addCase(getFavoritesTeachers.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
       })
       .addCase(logoutThunk.pending, (state, { payload }) => {
         state.isLoading = true;
@@ -104,40 +103,62 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = payload;
       })
-      .addCase(uploadAvatarAsync.pending, (state, action) => {
+      .addCase(uploadAvatarThunk.pending, (state, { payload }) => {
         state.isLoading = true;
       })
-      .addCase(uploadAvatarAsync.fulfilled, (state, { payload }) => {
+      .addCase(uploadAvatarThunk.fulfilled, (state, { payload }) => {
         state.photoURL = payload;
+        state.isLoading = false;
       })
-      .addCase(updateDisplayNameAsync.fulfilled, (state, action) => {
-        state.name = action.payload;
+      .addCase(uploadAvatarThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+      .addCase(updateDisplayNameThunk.pending, (state, { payload }) => {
+        state.isLoading = true;
+      })
+      .addCase(updateDisplayNameThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.name = payload;
+      })
+      .addCase(updateDisplayNameThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
       })
       .addCase(changePasswordAsync.pending, state => {
         state.isLoading = true;
-        state.error = null;
       })
-      .addCase(changePasswordAsync.fulfilled, (state, action) => {
+      .addCase(changePasswordAsync.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.successMessage = action.payload;
+        state.successMessage = payload;
       })
-      .addCase(changePasswordAsync.rejected, (state, action) => {
+      .addCase(changePasswordAsync.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.error = action.payload;
+        state.error = payload;
       })
-      .addCase('UPDATE_FAVORITES_AFTER_ADDITION', (state, action) => {
-        const { id } = action.payload;
+      // .addCase(updateUserProfileAsync.pending, state => {
+      //   state.isLoading = true;
+      // })
+      // .addCase(updateUserProfileAsync.fulfilled, (state, { payload }) => {
+      //   state.name = payload;
+      // })
+      // .addCase(updateUserProfileAsync.rejected, (state, { payload }) => {
+      //   state.isLoading = false;
+      //   state.error = payload;
+      // })
+      .addCase('UPDATE_FAVORITES_AFTER_ADDITION', (state, { payload }) => {
+        const { id } = payload;
         return {
           ...state,
           favorites: {
             ...state.favorites,
-            [id]: action.payload,
+            [id]: payload,
           },
         };
       })
-      .addCase('UPDATE_FAVORITES_AFTER_REMOVAL', (state, action) => {
+      .addCase('UPDATE_FAVORITES_AFTER_REMOVAL', (state, { payload }) => {
         const updatedFavorites = { ...state.favorites };
-        delete updatedFavorites[action.payload];
+        delete updatedFavorites[payload];
         return {
           ...state,
           favorites: updatedFavorites,

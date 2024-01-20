@@ -43,7 +43,6 @@ export const StyledInputWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing(5)};
-
   padding-bottom: ${({ theme }) => theme.spacing(10)};
 `;
 
@@ -120,8 +119,5 @@ export const StyledWrapperForm = styled.div`
 
   @media screen and (min-width: 768px) {
     width: ${({ theme }) => theme.spacing(95)};
-  }
-
-  @media screen and (min-width: 1440px) {
   }
 `;

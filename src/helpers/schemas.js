@@ -70,3 +70,30 @@ export const validationBooking = yup.object().shape({
       'Phone number must be in format +38(XXX)XXX-XX-XX'
     ),
 });
+
+export const validationUserChange = yup.object().shape({
+  name: yup
+    .string()
+    .max(12, 'the name must containe maximum of 12 characters')
+    .matches(
+      /^[a-zA-Z0-9_]{3,20}$/,
+      'Invalid username. Must be alphanumeric with underscores. Length between 3 and 12 characters.'
+    ),
+  oldPassword: yup
+    .string()
+    .when('newPassword', (newPassword, field) =>
+      newPassword[0] ? field.required('Please enter your password.') : field
+    ),
+  newPassword: yup
+    .string()
+    .nullable()
+    .min(8, 'New password must be at least 8 characters')
+    .test(
+      'notSameAsOldPassword',
+      'New password must be different from the old password',
+      function (value) {
+        const oldPassword = this.resolve(yup.ref('oldPassword'));
+        return !oldPassword || String(value) !== String(oldPassword);
+      }
+    ),
+});

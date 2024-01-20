@@ -16,7 +16,7 @@ export const getFavoritesTeachers = createAsyncThunk(
 
       return favorites;
     } catch (error) {
-      console.error('Помилка отримання улюблених вчителів з бекенду:', error);
+      console.error('Error getFavoritesTeachers ', error);
       throw error;
     }
   }

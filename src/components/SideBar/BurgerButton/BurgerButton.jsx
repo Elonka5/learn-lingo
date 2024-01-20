@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useSpring, animated } from 'react-spring';
-import css from './BurgerButton.module.css';
+import { useSpring } from 'react-spring';
 import { useEffect } from 'react';
+import { BurgerBtn, ContainerBMenu, Wrapper } from './BurgerButtonStyled';
 
 const CONFIG = {
   mass: 2,
@@ -10,7 +10,7 @@ const CONFIG = {
   clamp: true,
 };
 
-const Hamburger = ({ onClick, isModalOpen }) => {
+const BurgerButton = ({ onClick, isModalOpen }) => {
   const [animation, setAnimation] = useState({
     buns: false,
     patty: false,
@@ -75,19 +75,18 @@ const Hamburger = ({ onClick, isModalOpen }) => {
   });
 
   return (
-    <div className={css.App}>
-      <div
-        className={css.container}
+    <Wrapper>
+      <ContainerBMenu
         onClick={() => {
           handleClick();
         }}
       >
-        <animated.div className={css.burger} style={topSpring} />
-        <animated.div className={css.burger} style={midSpring} />
-        <animated.div className={css.burger} style={bottomSpring} />
-      </div>
-    </div>
+        <BurgerBtn style={topSpring} />
+        <BurgerBtn style={midSpring} />
+        <BurgerBtn style={bottomSpring} />
+      </ContainerBMenu>
+    </Wrapper>
   );
 };
 
-export default Hamburger;
+export default BurgerButton;

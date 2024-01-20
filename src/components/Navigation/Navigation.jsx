@@ -1,5 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsLoggedIn, selectUserName } from '../../redux/selectors';
+import {
+  selectIsLoggedIn,
+  selectUserAvatar,
+  selectUserName,
+} from '../../redux/selectors';
 import { useModal } from '../ModalContext/ModalContextProvider';
 import { logoutThunk } from '../../redux/Auth/AuthThunk';
 import ModalLogIn from '../ModalLogin/ModalLogIn';
@@ -26,9 +30,7 @@ import ModalSettings from '../ModalSettings/ModalSettings';
 const Navigation = ({ closeBurgerMenu }) => {
   const isAuth = useSelector(selectIsLoggedIn);
   const userName = useSelector(selectUserName);
-  console.log('userName:', userName);
-  const userAvatar = useSelector(state => state.auth.photoURL);
-  console.log(userAvatar);
+  const userAvatar = useSelector(selectUserAvatar);
 
   const dispatch = useDispatch();
   const toggleModal = useModal();
@@ -39,9 +41,7 @@ const Navigation = ({ closeBurgerMenu }) => {
     }
   }, [isAuth, dispatch]);
 
-  useEffect(() => {
-    console.log('User Data:', userName, userAvatar);
-  }, [userName, userAvatar]);
+  useEffect(() => {}, [userName, userAvatar]);
 
   const handleLogout = () => {
     dispatch(logoutThunk());
@@ -51,16 +51,16 @@ const Navigation = ({ closeBurgerMenu }) => {
     <>
       <SiteNav>
         <li>
-          <HomeSvg />
+          <HomeSvg aria-label="home_icon" />
           <StyledNavLink to="/">Home</StyledNavLink>
         </li>
         <li>
-          <TeacherSvg />
+          <TeacherSvg aria-label="teacher_icon" />
           <StyledNavLink to="teachers">Teachers</StyledNavLink>
         </li>
         {isAuth && (
           <li>
-            <FavSvg />
+            <FavSvg aria-label="favorite_icon" />
             <StyledNavLink to="favorites">Favorites</StyledNavLink>
           </li>
         )}
@@ -70,7 +70,7 @@ const Navigation = ({ closeBurgerMenu }) => {
         <AuthWrapper>
           {userName && (
             <UserName>
-              <UserSvg />
+              <UserSvg aria-label="user_icon" />
               {`${userName}`}
             </UserName>
           )}
@@ -85,7 +85,7 @@ const Navigation = ({ closeBurgerMenu }) => {
             Settings
           </button>
           <BtnLogIn style={{ gap: '18px' }} onClick={handleLogout}>
-            <LogOutSvg />
+            <LogOutSvg aria-label="logout_icon" />
             Logout
           </BtnLogIn>
         </AuthWrapper>
@@ -97,7 +97,7 @@ const Navigation = ({ closeBurgerMenu }) => {
               toggleModal(<ModalLogIn size="medium" title="Log In" />);
             }}
           >
-            <LogInSvg />
+            <LogInSvg aria-label="login_icon" />
             Log In
           </BtnLogIn>
           <Button

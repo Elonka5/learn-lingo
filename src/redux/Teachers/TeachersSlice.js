@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchTeachers } from './TeachersThunk';
+import { fetchTeachers} from './TeachersThunk';
 
 const initialState = {
   teachersData: [],

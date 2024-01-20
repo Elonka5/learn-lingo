@@ -6,7 +6,7 @@ const getSize = (size, screen) => modalSizes[screen][size];
 export const DivModalBox = styled.div`
   color: ${({ theme }) => theme.colors.primaryBlack};
   background-color: ${({ theme }) => theme.colors.white};
-  width: 280px;
+  width: ${({ theme }) => theme.spacing(70)};
   padding: ${({ $size }) => ($size === 'small' ? '32px 24px' : '32px 12px')};
   border-radius: ${({ theme }) => theme.radii.medium};
   overflow-x: hidden;
@@ -20,8 +20,6 @@ export const DivModalBox = styled.div`
   }
   @media screen and (min-width: 1440px) {
     width: ${({ $size }) => getSize($size, 'xl')}px;
-    /* overflow-y: scroll;
-    height: 100%; */
     transform: translateX(-0%) translateY(0%);
   }
 

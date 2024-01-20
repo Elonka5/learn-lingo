@@ -92,7 +92,7 @@ const TeacherCard = ({ teacher }) => {
               <h3>Languages</h3>
               <ul>
                 <li>
-                  <IoBookOutline />
+                  <IoBookOutline aria-label="book-icon" />
                   <StyledTextLang>Lessons online</StyledTextLang>
                   <StyledSpan>|</StyledSpan>
                 </li>
@@ -102,7 +102,7 @@ const TeacherCard = ({ teacher }) => {
                 </li>
 
                 <li>
-                  <FaStar fill="#FFC531" />
+                  <FaStar fill="#FFC531" aria-label="star-icon" />
                   <StyledTextLang>Rating: {rating}</StyledTextLang>
                   <StyledSpan>|</StyledSpan>
                 </li>
