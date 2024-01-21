@@ -145,7 +145,7 @@ export const SiteNav = styled.ul`
 export const BtnWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
   gap: ${({ theme }) => theme.spacing(5.5)};
   padding: ${({ theme }) => `${theme.spacing(0)} ${theme.spacing(3.5)}`};
 

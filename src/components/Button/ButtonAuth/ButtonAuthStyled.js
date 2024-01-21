@@ -5,6 +5,7 @@ export const BtnAuth = styled.button`
   align-items: center;
   color: ${({ theme }) => theme.colors.white};
   gap: ${({ theme }) => theme.spacing(6)};
+  padding-right: ${({ theme }) => theme.spacing(6)};
   border: ${({ theme }) => theme.borders.none};
   background-color: transparent;
   font-size: ${({ theme }) => theme.fontSizes.m};
