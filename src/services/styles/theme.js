@@ -49,6 +49,8 @@ export const theme = {
   lineHeights: {
     normal: 1.2,
     medium: 1.33,
+    big: 1.6,
+    large: 1.5,
     upperCase: 1.8,
   },
 

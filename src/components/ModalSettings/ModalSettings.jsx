@@ -1,14 +1,23 @@
+import { useSelector } from 'react-redux';
+import { selectTeachersLoading } from '../../redux/selectors';
+import Loader from '../Loader/Loader';
 import AvatarUploader from './AvatarUploader/AvatarUploader';
-import UserProfileForm from './UserProfile';
+import UserProfileForm from './UserProfile/UserProfile';
+import { WrapperAvatarAndProfile } from './UserProfile/UserProfileStyled';
 
 const ModalSettings = () => {
+  const isLoading = useSelector(selectTeachersLoading);
   return (
-    <div>
-      <AvatarUploader />
-      {/* <DisplayNameForm />
-      <ChangePasswordForm /> */}
-      <UserProfileForm />
-    </div>
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <WrapperAvatarAndProfile>
+          <AvatarUploader />
+          <UserProfileForm />
+        </WrapperAvatarAndProfile>
+      )}
+    </>
   );
 };
 

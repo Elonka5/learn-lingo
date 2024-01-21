@@ -3,10 +3,11 @@ import TeacherCard from '../TeacherCard/TeacherCard';
 import { TeachersList } from './TeacherCatalogStyled';
 import { useEffect } from 'react';
 import { loadUserFavoritesThunk } from '../../redux/Auth/AuthThunk';
+import { selectAuthId } from '../../redux/selectors';
 
 const TeacherCatalog = ({ teachers }) => {
   const dispatch = useDispatch();
-  const userId = useSelector(state => state.auth.userId);
+  const userId = useSelector(selectAuthId);
 
   useEffect(() => {
     if (userId) {

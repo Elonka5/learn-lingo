@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useModal } from '../ModalContext/ModalContextProvider';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginThunk } from '../../redux/Auth/AuthThunk';
 import {
   FormWrapper,
@@ -14,8 +14,10 @@ import { FiEyeOff } from 'react-icons/fi';
 import { FiEye } from 'react-icons/fi';
 import { Formik } from 'formik';
 import { validationSignUp } from '../../helpers/schemas';
-import Button from '../Button/Button';
 import { Notify } from 'notiflix';
+import { selectAuthLoading } from '../../redux/selectors';
+import Button from '../Button/Button';
+import Loader from '../Loader/Loader';
 
 const initialState = {
   email: '',
@@ -24,6 +26,7 @@ const initialState = {
 
 const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const isLoading = useSelector(selectAuthLoading);
 
   const toggleModal = useModal();
   const dispatch = useDispatch();
@@ -78,11 +81,17 @@ const SignUpForm = () => {
                   placeholder="Password"
                 />
                 <ToggleBtn type="button" onClick={togglePassword}>
-                  {showPassword ? <FiEye /> : <FiEyeOff />}
+                  {showPassword ? (
+                    <FiEye aria-label="show-password" />
+                  ) : (
+                    <FiEyeOff aria-label="hide-password" />
+                  )}
                 </ToggleBtn>
                 <StyledError name="password" component="span" />
               </WrapperInput>
-              <Button type="submit" text="Log in" />
+              <Button type="submit" text="Log in" disabled={isLoading}>
+                {isLoading ? <Loader /> : 'Log in'}
+              </Button>
             </FormWrapper>
           );
         }}

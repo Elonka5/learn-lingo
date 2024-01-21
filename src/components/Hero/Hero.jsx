@@ -1,9 +1,8 @@
-import React from 'react';
+import { HeroWrapper, StyledNav, Title, TitleWrapper } from './Hero.styled';
 import heroImgWebp from '../../assets/images/hero_img_webp.webp';
 import heroImgWebpRetina from '../../assets/images/hero_img_webp@2xmobile.webp';
 import heroImg from '../../assets/images/hero_img.png';
 import heroImgMobile from '../../assets/images/hero_img@2xmobile.png';
-import { HeroWrapper, StyledNav, Title, TitleWrapper } from './Hero.styled';
 
 const Hero = () => {
   return (

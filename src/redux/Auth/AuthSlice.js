@@ -136,16 +136,6 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = payload;
       })
-      // .addCase(updateUserProfileAsync.pending, state => {
-      //   state.isLoading = true;
-      // })
-      // .addCase(updateUserProfileAsync.fulfilled, (state, { payload }) => {
-      //   state.name = payload;
-      // })
-      // .addCase(updateUserProfileAsync.rejected, (state, { payload }) => {
-      //   state.isLoading = false;
-      //   state.error = payload;
-      // })
       .addCase('UPDATE_FAVORITES_AFTER_ADDITION', (state, { payload }) => {
         const { id } = payload;
         return {

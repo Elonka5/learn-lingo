@@ -72,11 +72,12 @@ export const validationBooking = yup.object().shape({
 });
 
 export const validationUserChange = yup.object().shape({
-  name: yup
+  displayName: yup
     .string()
-    .max(12, 'the name must containe maximum of 12 characters')
+    .min(3, 'The name must be at least 3 characters')
+    .max(12, 'The name must contain a maximum of 12 characters')
     .matches(
-      /^[a-zA-Z0-9_]{3,20}$/,
+      /^[a-zA-Z0-9_]{3,12}$/,
       'Invalid username. Must be alphanumeric with underscores. Length between 3 and 12 characters.'
     ),
   oldPassword: yup

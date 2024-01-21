@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchTeachers} from './TeachersThunk';
+import { fetchTeachers } from './TeachersThunk';
 
 const initialState = {
   teachersData: [],
@@ -19,14 +19,14 @@ const teacherSlice = createSlice({
     builder
       .addCase(fetchTeachers.pending, state => {
         state.isLoading = true;
-        state.error = null;
       })
       .addCase(fetchTeachers.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.teachersData = payload;
       })
-      .addCase(fetchTeachers.rejected, (state, action) => {
+      .addCase(fetchTeachers.rejected, (state, { payload }) => {
         state.isLoading = false;
+        state.error = payload;
       });
   },
 });

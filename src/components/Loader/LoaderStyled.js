@@ -1,8 +1,10 @@
 import styled from 'styled-components';
+
 export const WrapLoader = styled.div`
   --s: 40px;
   height: calc(var(--s) * 0.9);
   width: calc(var(--s) * 5);
+  z-index: 9999;
   --v1: transparent, #000 0.5deg 108deg, #0000 109deg;
   --v2: transparent, #000 0.5deg 36deg, #0000 37deg;
   -webkit-mask: conic-gradient(

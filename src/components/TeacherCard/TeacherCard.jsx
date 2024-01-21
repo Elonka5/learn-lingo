@@ -29,11 +29,15 @@ import {
 import { useState } from 'react';
 import { generateUniqueAvatar } from '../../helpers/Avatar';
 import { useDispatch, useSelector } from 'react-redux';
-import ModalBookTrial from '../ModalBookTrial/ModalBookTrial';
 import { useModal } from '../ModalContext/ModalContextProvider';
-import Button from '../Button/Button';
 import { toggleFavoriteTeacherThunk } from '../../helpers/handle';
-import { selectIsLoggedIn } from '../../redux/selectors';
+import {
+  selectAuthId,
+  selectIsLoggedIn,
+  selectUserFavorite,
+} from '../../redux/selectors';
+import Button from '../Button/Button';
+import ModalBookTrial from '../ModalBookTrial/ModalBookTrial';
 import Notiflix from 'notiflix';
 
 const TeacherCard = ({ teacher }) => {
@@ -55,15 +59,14 @@ const TeacherCard = ({ teacher }) => {
 
   const [showMore, setShowMore] = useState(false);
 
-  const userId = useSelector(state => state.auth.userId);
+  const userId = useSelector(selectAuthId);
   const isLogin = useSelector(selectIsLoggedIn);
+  const favorites = useSelector(selectUserFavorite);
 
   const toggleModal = useModal();
-  const favorites = useSelector(state => state.auth.favorites);
+  const dispatch = useDispatch();
 
   const isFavoriteTeach = favorites && favorites[teacher.id] !== undefined;
-
-  const dispatch = useDispatch();
 
   const toggleDescription = () => {
     setShowMore(!showMore);
@@ -102,7 +105,7 @@ const TeacherCard = ({ teacher }) => {
                 </li>
 
                 <li>
-                  <FaStar fill="#FFC531" aria-label="star-icon" />
+                  <FaStar fill="#FFC531" aria-label="rating-icon" />
                   <StyledTextLang>Rating: {rating}</StyledTextLang>
                   <StyledSpan>|</StyledSpan>
                 </li>
@@ -119,9 +122,9 @@ const TeacherCard = ({ teacher }) => {
           </NameLangWrapper>
           <BtnFavorite onClick={handleDelete}>
             {isFavoriteTeach ? (
-              <IoMdHeart fill="#FFC531" />
+              <IoMdHeart fill="#FFC531" aria-label="delete-from-favorite" />
             ) : (
-              <IoMdHeartEmpty />
+              <IoMdHeartEmpty aria-label="add-to-favorite" />
             )}
           </BtnFavorite>
           <LessonWrapper>
@@ -161,7 +164,7 @@ const TeacherCard = ({ teacher }) => {
                         <CommentsWrapper>
                           <p>{review.reviewer_name}</p>
                           <p style={{ color: '#121417' }}>
-                            <FaStar fill="#FFC531" />
+                            <FaStar fill="#FFC531" aria-label="rating-icon" />
                             {review.reviewer_rating}.0
                           </p>
                         </CommentsWrapper>

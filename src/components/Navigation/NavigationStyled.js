@@ -38,8 +38,15 @@ export const UserName = styled.p`
   align-items: center;
   gap: ${({ theme }) => theme.spacing(4.5)};
   color: ${({ theme }) => theme.colors.white};
+  font-size: ${({ theme }) => theme.fontSizes.m};
 
+  @media screen and (min-width: 768px) {
+    flex-direction: column;
+    font-size: ${({ theme }) => theme.fontSizes.ml};
+  }
   @media screen and (min-width: 1440px) {
+    font-size: ${({ theme }) => theme.fontSizes.m};
+    margin-left: ${({ theme }) => theme.spacing(0)} !important;
     color: ${({ theme }) => theme.colors.primaryBlack};
   }
 `;
@@ -69,24 +76,31 @@ export const TeacherSvg = styled(GiTeacher)`
 export const AuthWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing(6)};
-  padding: ${({ theme }) => `${theme.spacing(0)} ${theme.spacing(6)}`};
+  gap: ${({ theme }) => theme.spacing(1)};
+  padding: ${({ theme }) => `${theme.spacing(0)} ${theme.spacing(4.5)}`};
 
   p {
-    font-size: ${({ theme }) => theme.fontSizes.m};
+    /* font-size: ${({ theme }) => theme.fontSizes.m};
     font-weight: ${({ theme }) => theme.fontWeights.bold};
-    line-height: ${({ theme }) => theme.lineHeights.normal};
+    line-height: ${({ theme }) => theme.lineHeights.normal}; */
   }
 
   img {
-    width: 54px;
-    height: 54px;
+    position: absolute;
+    top: 10%;
+    left: 38%;
+    width: ${({ theme }) => theme.spacing(13.5)};
+    height: ${({ theme }) => theme.spacing(13.5)};
     border-radius: ${({ theme }) => theme.radii.round};
   }
 
   @media screen and (min-width: 768px) {
+    padding: ${({ theme }) => `${theme.spacing(0)} ${theme.spacing(16)}`};
     justify-content: center;
-    align-items: center;
+
+    img {
+      left: 46%;
+    }
   }
 
   @media screen and (min-width: 1440px) {
@@ -95,35 +109,9 @@ export const AuthWrapper = styled.div`
     align-items: center;
     gap: ${({ theme }) => theme.spacing(4)};
     padding: 0;
-  }
-`;
 
-export const BtnLogIn = styled.button`
-  display: flex;
-  align-items: center;
-  color: ${({ theme }) => theme.colors.white};
-  gap: ${({ theme }) => theme.spacing(6)};
-  border: ${({ theme }) => theme.borders.none};
-  background-color: transparent;
-  font-size: ${({ theme }) => theme.fontSizes.m};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  line-height: 20px;
-  cursor: pointer;
-  transition: color 0.3s ease;
-
-  @media screen and (min-width: 768px) {
-    gap: ${({ theme }) => theme.spacing(11)};
-    font-size: ${({ theme }) => theme.fontSizes.ml};
-  }
-
-  @media screen and (min-width: 1440px) {
-    font-size: ${({ theme }) => theme.fontSizes.m};
-    color: ${({ theme }) => theme.colors.primaryBlack};
-    gap: ${({ theme }) => theme.spacing(2)};
-
-    &:hover,
-    &:focus {
-      color: ${({ theme }) => theme.colors.green};
+    img {
+      position: static;
     }
   }
 `;
@@ -132,8 +120,9 @@ export const SiteNav = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: ${({ theme }) => theme.spacing(7)};
-  margin-bottom: ${({ theme }) => theme.spacing(7)};
+  gap: ${({ theme }) => theme.spacing(5)};
+  margin-bottom: ${({ theme }) => theme.spacing(5)};
+
   li {
     display: flex;
     align-items: center;
@@ -193,6 +182,8 @@ export const LogOutSvg = styled(FiLogOut)`
   height: ${({ theme }) => theme.spacing(5)};
 
   @media screen and (min-width: 768px) {
+    width: ${({ theme }) => theme.spacing(6)};
+    height: ${({ theme }) => theme.spacing(6)};
   }
 
   @media screen and (min-width: 1440px) {
@@ -246,4 +237,41 @@ export const StyledNavLink = styled(NavLink)`
       background-position: 0;
     }
   }
+`;
+
+export const BtnSettings = styled.button`
+  background-color: transparent;
+  width: ${({ theme }) => theme.spacing(5)};
+  height: ${({ theme }) => theme.spacing(5)};
+  border: ${({ theme }) => theme.borders.none};
+  cursor: pointer;
+  position: relative;
+  top: -30%;
+  left: -4%;
+  svg {
+    fill: ${({ theme }) => theme.colors.white};
+  }
+  @media screen and (min-width: 768px) {
+    top: -36%;
+    left: -2%;
+    width: ${({ theme }) => theme.spacing(6)};
+    height: ${({ theme }) => theme.spacing(6)};
+    svg {
+      width: ${({ theme }) => theme.spacing(6)};
+      height: ${({ theme }) => theme.spacing(6)};
+    }
+  }
+
+  @media screen and (min-width: 1440px) {
+    position: static;
+    svg {
+      fill: ${({ theme }) => theme.colors.green};
+      width: ${({ theme }) => theme.spacing(5)};
+      height: ${({ theme }) => theme.spacing(5)};
+    }
+  }
+`;
+
+export const AvatarWrap = styled.div`
+  position: relative;
 `;

@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setFilter } from '../../redux/filterSlice';
-import Select from 'react-select';
 import { makes, languages, pricePoints } from '../../helpers/searchForm';
 import { LabWrap, SelectWrapper } from './SearchFormStyled';
 import {
@@ -10,6 +9,7 @@ import {
   customStylesPrice,
   formatOptionLabel,
 } from '../../constants/selectStyles';
+import Select from 'react-select';
 
 const SearchForm = () => {
   const [selectedLevels, setSelectedLevels] = useState([]);

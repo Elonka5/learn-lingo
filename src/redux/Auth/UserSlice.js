@@ -12,7 +12,6 @@ const userSlice = createSlice({
     builder
       .addCase(sendUserDataThunk.pending, state => {
         state.isloading = true;
-        state.error = null;
       })
       .addCase(sendUserDataThunk.fulfilled, state => {
         state.isloading = false;

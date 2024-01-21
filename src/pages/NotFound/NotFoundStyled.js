@@ -30,7 +30,6 @@ export const WrapperNotFound = styled.div`
     font-size: ${({ theme }) => theme.fontSizes.xxml};
     font-weight: ${({ theme }) => theme.fontWeights.bold};
     color: ${({ theme }) => theme.colors.green};
-    /* margin-bottom: ${({ theme }) => theme.spacing(6)}; */
   }
 
   p {

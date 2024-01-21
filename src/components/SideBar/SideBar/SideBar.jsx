@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { WrapperDiv } from './SideBarStyled';
 import BurgerModalSide from '../SideBarSide';
 import BurgerButton from '../BurgerButton/BurgerButton';

@@ -14,8 +14,12 @@ export const Card = styled.li`
   padding: ${({ theme }) => theme.spacing(5)};
   border-radius: ${({ theme }) => theme.radii.card};
   position: relative;
+  transform: scale(1);
+  transition: transfom 250ms linear;
 
-  @media screen and (min-width: 768px) {
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
 
   @media screen and (min-width: 1440px) {
@@ -182,9 +186,6 @@ export const LessonWrapper = styled.div`
       flex-direction: row;
     }
   }
-
-  @media screen and (min-width: 1440px) {
-  }
 `;
 
 export const LevelWrapper = styled.div`
@@ -211,8 +212,6 @@ export const LevelWrapper = styled.div`
       background-color: ${({ theme }) => theme.colors.green};
       border: ${({ theme }) => theme.borders.none};
     }
-  }
-  @media screen and (min-width: 768px) {
   }
 
   @media screen and (min-width: 1440px) {
@@ -243,13 +242,12 @@ export const ReviewWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: ${({ theme }) => theme.spacing(3)};
-  /* margin-bottom: ${({ theme }) => theme.spacing(4)}; */
 `;
 
 export const CommentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: ${({ theme }) => theme.spacing(0.5)};
 
   p {
     color: ${({ theme }) => theme.colors.secondaryFont};
@@ -268,9 +266,6 @@ export const ReviewList = styled.ul`
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing(8)};
   margin-bottom: ${({ theme }) => theme.spacing(4)};
-
-  @media screen and (min-width: 768px) {
-  }
 
   @media screen and (min-width: 1440px) {
     gap: ${({ theme }) => theme.spacing(8)};
@@ -301,18 +296,18 @@ export const NameLangWrapper = styled.div`
 
 export const BtnFavorite = styled.button`
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 26px;
-  height: 26px;
+  top: ${({ theme }) => theme.spacing(5)};
+  right: ${({ theme }) => theme.spacing(5)};
+  width: ${({ theme }) => theme.spacing(6.5)};
+  height: ${({ theme }) => theme.spacing(6.5)};
   padding: 0;
   border: ${({ theme }) => theme.borders.none};
   background-color: transparent;
   cursor: pointer;
 
   & svg {
-    width: 26px;
-    height: 26px;
-    margin-right: 0;
+    width: ${({ theme }) => theme.spacing(6.5)};
+    height: ${({ theme }) => theme.spacing(6.5)};
+    margin-right: ${({ theme }) => theme.spacing(0)};
   }
 `;

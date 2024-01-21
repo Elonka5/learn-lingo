@@ -1,11 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
-import Layout from './components/Layout/Layout';
-import PublicRoute from './components/Routes/PublicRoute';
-import PrivateRoute from './components/Routes/PrivateRoute';
-
 import { GlobalStyle } from './services/styles/GlobalStyles';
 import { lazy } from 'react';
 import { Suspense } from 'react';
+import Layout from './components/Layout/Layout';
+import PublicRoute from './components/Routes/PublicRoute';
+import PrivateRoute from './components/Routes/PrivateRoute';
 import Loader from './components/Loader/Loader';
 import React from 'react';
 

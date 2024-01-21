@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyledNav } from '../../components/Hero/Hero.styled';
 import { BackgroundNotFound, WrapperNotFound } from './NotFoundStyled';
 import notFoundImg from '../../assets/images/not_found.png';

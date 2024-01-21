@@ -1,4 +1,3 @@
-import React from 'react';
 import { DivLoaderWrapper, WrapLoader } from './LoaderStyled';
 
 const Loader = () => {

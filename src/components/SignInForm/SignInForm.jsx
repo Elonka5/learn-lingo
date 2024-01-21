@@ -1,5 +1,5 @@
 import { registerThunk } from '../../redux/Auth/AuthThunk';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../ModalContext/ModalContextProvider';
 import { FiEyeOff } from 'react-icons/fi';
 import { FiEye } from 'react-icons/fi';
@@ -14,8 +14,10 @@ import {
 } from '../SignUpForm/SignUpFormStyled';
 import { validationSignIn } from '../../helpers/schemas';
 import { useState } from 'react';
-import Button from '../Button/Button';
 import { Notify } from 'notiflix';
+import { selectAuthLoading } from '../../redux/selectors';
+import Button from '../Button/Button';
+import Loader from '../Loader/Loader';
 
 const initialState = {
   displayName: '',
@@ -25,6 +27,7 @@ const initialState = {
 
 const SignInForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const isLoading = useSelector(selectAuthLoading);
 
   const toggleModal = useModal();
 
@@ -89,11 +92,17 @@ const SignInForm = () => {
                   placeholder="Password"
                 />
                 <ToggleBtn type="button" onClick={togglePassword}>
-                  {showPassword ? <FiEye /> : <FiEyeOff />}
+                  {showPassword ? (
+                    <FiEye aria-label="show-password" />
+                  ) : (
+                    <FiEyeOff aria-label="hide-password" />
+                  )}
                 </ToggleBtn>
                 <StyledError name="password" component="span" />
               </WrapperInput>
-              <Button type="submit" text="Registration" />
+              <Button type="submit" text="Registration" disabled={isLoading}>
+                {isLoading ? <Loader /> : 'Registration'}
+              </Button>
             </FormWrapper>
           );
         }}

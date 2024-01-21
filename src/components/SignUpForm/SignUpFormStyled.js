@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import { Form, Field, ErrorMessage } from 'formik';
+import Notiflix from 'notiflix';
 
 export const FormWrapper = styled(Form)`
   display: flex;
   flex-direction: column;
-  width: ${({ theme }) => theme.spacing(64)};
+  width: ${({ theme }) => theme.spacing(63)};
 
   @media screen and (min-width: 768px) {
     width: ${({ theme }) => theme.spacing(95)};
@@ -82,9 +83,6 @@ export const StyledError = styled(ErrorMessage)`
   @media screen and (min-width: 768px) {
     width: 100%;
   }
-
-  @media screen and (min-width: 1440px) {
-  }
 `;
 
 export const ToggleBtn = styled.button`
@@ -103,3 +101,18 @@ export const WrapperInput = styled.div`
   position: relative;
   margin-bottom: ${({ theme }) => theme.spacing(4.5)};
 `;
+
+Notiflix.Notify.init({
+  timeout: 2000,
+  fontFamily: 'Roboto',
+  success: {
+    background: '#9FBAAE',
+    timeout: 8000,
+    textColor: '#fff',
+    childClassName: 'notiflix-notify-success',
+    notiflixIconColor: 'rgba(0,0,0,0.2)',
+    fontAwesomeClassName: 'fas fa-exclamation-circle',
+    fontAwesomeIconColor: 'rgba(0,0,0,0.4)',
+    backOverlayColor: 'rgba(238,191,49,0.2)',
+  },
+});

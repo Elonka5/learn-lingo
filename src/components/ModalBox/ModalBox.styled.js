@@ -26,7 +26,7 @@ export const DivModalBox = styled.div`
   ${({ $variant }) =>
     $variant === 'modalbook' &&
     css`
-      height: 100%;
+      height: 96%;
       overflow-y: scroll;
 
       @media screen and (min-width: 1440px) {
@@ -43,6 +43,15 @@ export const DivModalBox = styled.div`
   &::-webkit-scrollbar-thumb {
     background-color: ${({ theme }) => theme.colors.green};
     border-radius: ${({ theme }) => theme.radii.small};
+  }
+  ${({ $variant }) =>
+    $variant === 'modalsettings' &&
+    css`
+      height: 90%;
+      overflow-y: scroll;
+    `}
+  @media screen and (min-width: 1440px) {
+    height: auto;
   }
 `;
 

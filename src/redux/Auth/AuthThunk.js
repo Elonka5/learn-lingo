@@ -28,7 +28,7 @@ export const registerThunk = createAsyncThunk(
         password
       );
 
-      const defaultAvatar = `https://ui-avatars.com/api/?name=${displayName}&background=9FBAAE`;
+      const defaultAvatar = `https://ui-avatars.com/api/?name=${displayName}&background=F8F8F8&color=9FBAAE`;
 
       const uid = userCredential.user.uid;
 
@@ -164,7 +164,7 @@ export const updateDisplayNameThunk = createAsyncThunk(
       await update(userRef, { displayName: newDisplayName });
       return newDisplayName;
     } catch (error) {
-      console.error('Помилка при оновленні імені користувача:', error);
+      console.error('Cant change new Name', error);
       throw error;
     }
   }
@@ -210,42 +210,3 @@ export const uploadAvatarThunk = createAsyncThunk(
     }
   }
 );
-
-// export const updateUserProfileAsync = createAsyncThunk(
-//   'user/updateUserProfile',
-//   async (
-//     { userId, newDisplayName, oldPassword, newPassword },
-//     { rejectWithValue }
-//   ) => {
-//     try {
-
-//       if (newDisplayName) {
-//         const userRef = ref(db, `users/${userId}`);
-//         await updateProfile(auth.currentUser, {
-//           displayName: newDisplayName,
-//         });
-//         await update(userRef, { displayName: newDisplayName });
-//       }
-
-//       if (oldPassword && newPassword) {
-//         const user = auth.currentUser;
-
-//         if (!user) {
-//           throw new Error('Not authorized.');
-//         }
-
-//         const credentials = EmailAuthProvider.credential(
-//           user.email,
-//           oldPassword
-//         );
-//         await reauthenticateWithCredential(user, credentials);
-//         await updatePassword(user, newPassword);
-//       }
-
-//       // Return a success message or any other relevant data
-//       return 'Profile updated successfully.';
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// );

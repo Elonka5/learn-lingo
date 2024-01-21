@@ -26,7 +26,7 @@ export const TitleWrapper = styled.div`
   p {
     font-size: ${({ theme }) => theme.fontSizes.m};
     font-weight: ${({ theme }) => theme.fontWeights.regular};
-    line-height: 22px; /* 137.5% */
+    line-height: ${({ theme }) => theme.lineHeights.large};
     letter-spacing: -0.32px;
     margin-bottom: ${({ theme }) => theme.spacing(16)};
     text-align: center;
@@ -92,7 +92,7 @@ export const StyledNav = styled(Link)`
 
   font-size: ${({ theme }) => theme.fontSizes.l};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
-  line-height: 28px; /* 155.556% */
+  line-height: ${({ theme }) => theme.lineHeights.large};
   transition: background-color 0.3s ease;
 
   &:hover,

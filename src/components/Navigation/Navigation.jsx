@@ -5,13 +5,11 @@ import {
   selectUserName,
 } from '../../redux/selectors';
 import { useModal } from '../ModalContext/ModalContextProvider';
+import { useEffect } from 'react';
 import { logoutThunk } from '../../redux/Auth/AuthThunk';
-import ModalLogIn from '../ModalLogin/ModalLogIn';
-import ModalRegistration from '../ModalRegistration/ModalRegistration';
-import Button from '../Button/Button';
 import {
   AuthWrapper,
-  BtnLogIn,
+  BtnSettings,
   BtnWrapper,
   FavSvg,
   HomeSvg,
@@ -21,11 +19,15 @@ import {
   StyledNavLink,
   TeacherSvg,
   UserName,
-  UserSvg,
 } from './NavigationStyled';
 import { clearUserData } from '../../redux/Auth/AuthSlice';
-import { useEffect } from 'react';
+import { IoSettingsSharp } from 'react-icons/io5';
+import { calculateMargin } from '../../helpers/calculateMargin';
 import ModalSettings from '../ModalSettings/ModalSettings';
+import ModalLogIn from '../ModalLogin/ModalLogIn';
+import ModalRegistration from '../ModalRegistration/ModalRegistration';
+import Button from '../Button/Button';
+import ButtonAuth from '../Button/ButtonAuth/ButtonAuth';
 
 const Navigation = ({ closeBurgerMenu }) => {
   const isAuth = useSelector(selectIsLoggedIn);
@@ -69,37 +71,40 @@ const Navigation = ({ closeBurgerMenu }) => {
       {isAuth ? (
         <AuthWrapper>
           {userName && (
-            <UserName>
-              <UserSvg aria-label="user_icon" />
+            <UserName style={{ marginLeft: calculateMargin(userName) }}>
               {`${userName}`}
             </UserName>
           )}
           {userAvatar && <img src={userAvatar} alt="user_avatar" />}
-          <button
+          <BtnSettings
             onClick={() => {
+              closeBurgerMenu();
               toggleModal(
-                <ModalSettings size="medium" title="Your Settings" />
+                <ModalSettings
+                  variant="modalsettings"
+                  size="medium"
+                  title="Settings"
+                />
               );
             }}
           >
-            Settings
-          </button>
-          <BtnLogIn style={{ gap: '18px' }} onClick={handleLogout}>
+            <IoSettingsSharp aria-label="settings-icon" />
+          </BtnSettings>
+          <ButtonAuth variant="logout" onClick={handleLogout} text="Logout">
             <LogOutSvg aria-label="logout_icon" />
-            Logout
-          </BtnLogIn>
+          </ButtonAuth>
         </AuthWrapper>
       ) : (
         <BtnWrapper>
-          <BtnLogIn
+          <ButtonAuth
             onClick={() => {
               closeBurgerMenu();
               toggleModal(<ModalLogIn size="medium" title="Log In" />);
             }}
+            text="Log In"
           >
             <LogInSvg aria-label="login_icon" />
-            Log In
-          </BtnLogIn>
+          </ButtonAuth>
           <Button
             text="Registration"
             variant="register"

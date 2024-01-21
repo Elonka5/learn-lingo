@@ -33,14 +33,14 @@ export const DescrWrapper = styled.ul`
 export const TitleDescription = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.xl};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
-  line-height: 32px; /* 114.286% */
+  line-height: ${({ theme }) => theme.lineHeights.normal};
   letter-spacing: -0.56px;
 `;
 
 export const TextDescription = styled.p`
   color: ${({ theme }) => theme.colors.secondaryBlack};
   font-size: ${({ theme }) => theme.fontSizes.s};
-  line-height: 18px; /* 128.571% */
+  ${({ theme }) => theme.lineHeights.large};
   letter-spacing: -0.28px;
   width: ${({ theme }) => theme.spacing(18.5)};
 `;

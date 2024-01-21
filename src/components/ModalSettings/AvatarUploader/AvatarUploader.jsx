@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuthId, selectUserAvatar } from '../../../redux/selectors';
@@ -37,7 +37,8 @@ const AvatarUploader = () => {
           <DropZoneText>Drop the file here ...</DropZoneText>
         ) : (
           <DropZoneText>
-            Drag 'n' drop some files here, or click to select files
+            Drag 'n' drop some files <span>here,</span> or <span>click</span> to
+            select files
           </DropZoneText>
         )}
       </DropZoneContainer>

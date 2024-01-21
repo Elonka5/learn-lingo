@@ -1,15 +1,16 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import TeacherCatalog from '../../components/TeacherCatalog/TeacherCatalog';
-import Container from '../../components/Container/Container';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectFilteredTeachers,
   selectTeachersLoading,
 } from '../../redux/selectors';
 import { fetchTeachers } from '../../redux/Teachers/TeachersThunk';
+import { LoadMoreBtn } from '../../components/TeacherCatalog/TeacherCatalogStyled';
+import TeacherCatalog from '../../components/TeacherCatalog/TeacherCatalog';
+import Container from '../../components/Container/Container';
 import SearchForm from '../../components/SearchForm/SearchForm';
 import Loader from '../../components/Loader/Loader';
-import { LoadMoreBtn } from '../../components/TeacherCatalog/TeacherCatalogStyled';
+import ButtonToTop from '../../components/Button/ButtonToTop/ButtonToTop';
 
 const Teachers = () => {
   const [visibleTeachers, setVisibleTeachers] = useState(4);
@@ -49,6 +50,7 @@ const Teachers = () => {
           <p>No teachers found. Please adjust your filter.</p>
         )}
       </Container>
+      <ButtonToTop />
     </main>
   );
 };
