@@ -77,13 +77,9 @@ export const AuthWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing(1)};
-  padding: ${({ theme }) => `${theme.spacing(0)} ${theme.spacing(4.5)}`};
-
-  p {
-    /* font-size: ${({ theme }) => theme.fontSizes.m};
-    font-weight: ${({ theme }) => theme.fontWeights.bold};
-    line-height: ${({ theme }) => theme.lineHeights.normal}; */
-  }
+  flex-wrap: wrap;
+  align-content: center;
+  padding-left: ${({ theme }) => theme.spacing(2.5)};
 
   img {
     position: absolute;
@@ -247,7 +243,7 @@ export const BtnSettings = styled.button`
   cursor: pointer;
   position: relative;
   top: -30%;
-  left: -4%;
+  left: -3.5%;
   svg {
     fill: ${({ theme }) => theme.colors.white};
   }

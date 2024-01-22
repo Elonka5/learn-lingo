@@ -51,7 +51,7 @@ export const DivModalBox = styled.div`
       overflow-y: scroll;
     `}
   @media screen and (min-width: 1440px) {
-    height: auto;
+    height: 96%;
   }
 `;
 
